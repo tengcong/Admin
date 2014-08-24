@@ -1,0 +1,13 @@
+development:
+  sessions:
+    default:
+      database: scrawler_dev
+      hosts:
+        - localhost:27017
+
+production:
+  sessions:
+    default:
+      database: scrawler_prod
+      hosts:
+        - localhost:27017
