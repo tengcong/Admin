@@ -22,10 +22,14 @@
     $(function(){
       $('.del-btn').click(function(e){
         e.preventDefault();
+        $this = $(this);
         var id = $(this).data('id');
         $.get('/delete/' + id, function(data){
+          res = JSON.parse(data)
+          console.log(data)
+          console.log(res)
           if(data.success){
-            window.location.reload();
+            $this.parent('.item').remove()
           }
         })
       })
