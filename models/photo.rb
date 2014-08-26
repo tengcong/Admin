@@ -13,7 +13,9 @@ class Photo
   after_destroy :destroy_from_upyun
 
   def destroy_from_upyun
-    Uploader.instance.delete url
+    puts '-' * 30
+    puts 'delete from upyun'
+    puts Uploader.instance.delete url
   end
 
 end
