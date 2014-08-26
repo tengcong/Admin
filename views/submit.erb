@@ -2,14 +2,25 @@
   <meta name="viewport" content="width=device-width">
   <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
   <style type="text/css">
+.big-link{
+  float: left;
+  width: 100px;
+  height: 30px;
+  background: lightblue;
+}
   </style>
 
   <body>
 
+  通过表单提交：
   <form action="/submit" method='POST'>
     <input type="text" name='url' />
     <input type="submit" value='submit' />
   </form>
+
+  或者直接拖拽下面的链接到收藏夹（书签）中：
+
+  <a class='big-link' href="javascript:(function(){var head=document.getElementsByTagName('head')[0];var script=document.createElement('script');script.src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js';document.getElementsByTagName('head')[0].appendChild(script);script.onload=function(){$('img').css({'border':'5px solid red'}).parents('a').removeAttr('href');function resolveURL(url,base){if(/^https?:/.test(url))return url;var basea=document.createElement('a'),urla=document.createElement('a');basea.href=base,urla.href=url;urla.protocol=basea.protocol;if(!/^\/\//.test(url))urla.hostname=basea.hostname;if(/^\//.test(url))return urla.href;var urlparts=url.split(/\//);var baseparts=basea.pathname.split(/\//);if(!/\/$/.test(base))baseparts.pop();while(urlparts[0]=='..'){baseparts.pop();urlparts.shift()}urla.pathname=baseparts.join('/')+'/'+urlparts.join('/');return urla.href}$('img').click(function(){var url=$(this).attr('src');var img_path=resolveURL(url,window.location.pathname);$.ajax({url:'http://106.185.39.131:4567/submit',type:'POST',data:{url:img_path},error:function(){alert('错误')},success:function(result){alert('添加成功')}})})}})();">拖我</a>
 
   </body>
 
