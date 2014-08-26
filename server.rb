@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'sinatra/cross_origin'
 require 'mongoid'
 require 'open-uri'
 
@@ -30,7 +29,7 @@ class App < Sinatra::Base
   end
 
   post '/submit' do
-    cross_origin
+    response['Access-Control-Allow-Origin'] = '*'
     origin_url = params[:url]
     puts '=' * 30
     puts origin_url
