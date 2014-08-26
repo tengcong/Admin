@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'mongoid'
+require 'open-uri'
 
 set :bind, '0.0.0.0'
 
