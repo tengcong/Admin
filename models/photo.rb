@@ -10,7 +10,7 @@ class Photo
   # [0, 1] 0 users, 1 robot
   field :type,       type: Integer
 
-  after_destroy :destroy_from_upyun
+  before_destroy :destroy_from_upyun
 
   def destroy_from_upyun
     puts '-' * 30
