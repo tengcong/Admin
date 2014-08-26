@@ -8,7 +8,7 @@ Mongoid.load!("config/mongoid.yml", 'development')
 Dir["./models/*.rb"].each { |f| require f }
 
 class App < Sinatra::Base
-  include Sinatra::CrossOrigin::Helpers
+  include Sinatra::CrossOrigin
 
   set :bind, '0.0.0.0'
 
