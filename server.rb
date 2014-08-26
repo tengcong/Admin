@@ -17,5 +17,5 @@ end
 get '/delete/:id' do
   photo = Photo.find params[:id]
   res = photo.destroy
-  {success: res}
+  {success: res}.to_json
 end
