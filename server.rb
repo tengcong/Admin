@@ -10,7 +10,7 @@ Dir["./models/*.rb"].each { |f| require f }
 get '/' do
   offset = params[:offset] || 0
   limit = params[:limit] || 100
-  @photos = Photo.offset(offset).limit(limit)
+  @photos = Photo.desc('created_at').offset(offset).limit(limit)
   erb :index
 end
 
