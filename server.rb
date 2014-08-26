@@ -26,6 +26,7 @@ get '/submit' do
 end
 
 post '/submit' do
+  cross_origin
   origin_url = params[:url]
   uploader = Uploader.instance
   if !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
