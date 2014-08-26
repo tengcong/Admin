@@ -13,6 +13,6 @@ img{
 <% @photos.each do |p| %>
   <div class="item">
     <image src="<%= p.url %>">
-    <%= link_to 'DELETE', "/delete/#{p.id}" %>
+    <a href="/delete/<%= p.id %>">DELETE</a>
   </div>
 <% end %>
