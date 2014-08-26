@@ -13,7 +13,7 @@ uploader = Uploader.new
 save_to_db = lambda do |img_ele|
   origin_url = img_ele.attr 'src'
 
-  if url = uploader.upload_with(origin_url)
+  if !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
     Photo.create origin_url: origin_url, url: url, type: 1
   end
 end
