@@ -19,3 +19,15 @@ get '/delete/:id' do
   res = photo.destroy
   {success: res}.to_json
 end
+
+get '/submit' do
+  erb :submit
+end
+
+post '/submit' do
+  origin_url = params[:url]
+  if !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
+    res = Photo.create(origin_url: origin_url, url: url, type: 1)
+  end
+  {success: res}.to_json
+end
