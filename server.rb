@@ -8,8 +8,8 @@ Mongoid.load!("config/mongoid.yml", 'development')
 Dir["./models/*.rb"].each { |f| require f }
 
 get '/' do
-  offset = params[:offset]
-  limit = params[:limit]
+  offset = params[:offset] || 0
+  limit = params[:limit] || 100
   @photos = Photo.offset(offset).limit(limit)
   erb :index
 end
