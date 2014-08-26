@@ -16,6 +16,6 @@ end
 
 get '/delete/:id' do
   photo = Photo.find params[:id]
-  photo.destroy
-  true
+  res = photo.destroy
+  {success: res}
 end

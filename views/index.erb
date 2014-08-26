@@ -20,7 +20,8 @@
 
   <script type="text/javascript">
     $(function(){
-      $('.del-btn').click(function(){
+      $('.del-btn').click(function(e){
+        e.preventDefault();
         var id = $(this).data('id');
         $.get('/delete/' + id, function(data){
           if(data.success){
