@@ -8,7 +8,7 @@ Mongoid.load!("config/mongoid.yml", 'development')
 # models
 Dir["./models/*.rb"].each { |f| require f }
 
-uploader = Uploader.new
+uploader = Uploader.instance
 
 save_to_db = lambda do |img_ele|
   origin_url = img_ele.attr 'src'
