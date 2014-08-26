@@ -12,7 +12,7 @@
   </style>
 
   <body>
-  <a href="/?offset=<%= (params[:offset] || 0)  + 100 || 0 %>" class="next-page">Next Page</a>
+  <a href="/?offset=<%= (params[:offset].to_i || 0)  + 100 || 0 %>" class="next-page">Next Page</a>
 
     <% @photos.each do |p| %>
       <div class="item">
