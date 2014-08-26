@@ -26,9 +26,7 @@
         var id = $(this).data('id');
         $.get('/delete/' + id, function(data){
           res = JSON.parse(data)
-          console.log(data)
-          console.log(res)
-          if(data.success){
+          if(res.success){
             $this.parent('.item').remove()
           }
         })
