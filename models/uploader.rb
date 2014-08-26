@@ -11,7 +11,7 @@ class Uploader
 
   def delete url
     file_name = url.match(/com(.+)/)[1]
-    up.delete(file_name)
+    @up_client.delete(file_name)
   end
 
   def upload_with url
