@@ -26,6 +26,7 @@ end
 
 post '/submit' do
   origin_url = params[:url]
+  uploader = Uploader.instance
   if !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
     res = Photo.create(origin_url: origin_url, url: url, type: 1)
   end
