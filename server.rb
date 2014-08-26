@@ -8,6 +8,14 @@ Mongoid.load!("config/mongoid.yml", 'development')
 Dir["./models/*.rb"].each { |f| require f }
 
 get '/' do
-  @photos = Photo.desc('created_at').limit(100)
+  offset = params[:offset]
+  limit = params[:limit]
+  @photos = Photo.offset(offset).limit(limit)
+  erb :index
+end
+
+get '/delete/:id' do
+  photo = Photo.find params[:id]
+  photo.destroy
   erb :index
 end

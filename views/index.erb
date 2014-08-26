@@ -1,11 +1,18 @@
 
+<meta name="viewport" content="width=device-width">
 <style type="text/css">
+
+.item{
+  float: left;
+}
 img{
   width: 200px;
-  float: left;
 }
 </style>
 
 <% @photos.each do |p| %>
-  <image src="<%= p.url %>">
+  <div class="item">
+    <image src="<%= p.url %>">
+    <%= link_to 'DELETE', "/delete/#{p.id}" %>
+  </div>
 <% end %>
