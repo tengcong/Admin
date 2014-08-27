@@ -10,6 +10,13 @@ class App < Sinatra::Base
 
   set :bind, '0.0.0.0'
 
+  get '/list' do
+    offset = params[:offset] || 0
+    limit = params[:limit] || 10
+    @photos = Photo.desc('created_at').offset(offset).limit(limit)
+    {data: @photos}.to_json
+  end
+
   get '/' do
     offset = params[:offset] || 0
     limit = params[:limit] || 100
