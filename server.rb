@@ -19,7 +19,7 @@ class App < Sinatra::Base
 
   get '/' do
     offset = params[:offset] || 0
-    limit = params[:limit] || 20
+    limit = params[:limit] || 21
     @photos = Photo.desc('created_at').offset(offset).limit(limit)
     erb :index
   end
