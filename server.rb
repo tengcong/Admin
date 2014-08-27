@@ -17,6 +17,13 @@ class App < Sinatra::Base
     erb :index
   end
 
+  get '/delete' do
+    offset = params[:offset] || 0
+    limit = params[:limit] || 100
+    @photos = Photo.desc('created_at').offset(offset).limit(limit)
+    erb :delete
+  end
+
   get '/delete/:id' do
     photo = Photo.find params[:id]
     res = photo.destroy
