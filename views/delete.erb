@@ -31,7 +31,7 @@
 
     <% @photos.each do |p| %>
       <div class="item">
-      <image src="<%= p.url %>">
+      <image src="<%= p.url %>!retina">
       <a class='del-btn' data-id="<%= p.id %>" href="#">DELETE</a>
     </div>
     <% end %>
