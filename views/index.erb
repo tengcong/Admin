@@ -2,7 +2,6 @@
   <meta name="viewport" content="width=device-width">
   <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
   <style type="text/css">
-
   .item{
     float: left;
     width: 300px;
@@ -11,29 +10,44 @@
     margin-right: 10px;
     margin-bottom: 15px;
   }
+
   img{
     width: 300px;
   }
 
+  .clearfix{
+    clear: left;
+  }
+
+  .photos{
+    margin: 0 auto;
+    max-width: 940px;
+  }
+
   .next-page{
-    position: fixed;
-    width: 100px;
+    float: left;
+    width: 100%;
     height: 50px;
     background: lightblue;
     color: white;
-    top: 50px;
-    right: 50px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    opacity: 0.5;
   }
   </style>
 
   <body>
-  <a href="/?offset=<%= (params[:offset].to_i || 0)  + 100 || 0 %>" class="next-page">Next Page</a>
-
+  <div class="photos">
     <% @photos.each do |p| %>
       <div class="item">
-      <image src="<%= p.url %>!retina">
-    </div>
+        <image src="<%= p.url %>!retina">
+      </div>
     <% end %>
+    <div class="clearfix"></div>
+
+    <a href="/?offset=<%= (params[:offset].to_i || 0)  + 20 || 0 %>" class="next-page">下一页</a>
+  </div>
   </body>
 
   <script type="text/javascript">
