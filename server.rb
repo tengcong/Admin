@@ -10,7 +10,7 @@ class App < Sinatra::Base
 
   set :bind, '0.0.0.0'
 
-  get '/create_user' do
+  post '/create_user' do
     if User.find_or_create_by(email: params[:email])
       { success: true }.to_json
     else
@@ -30,6 +30,16 @@ class App < Sinatra::Base
     limit = params[:limit] || 21
     @photos = Photo.desc('created_at').offset(offset).limit(limit)
     erb :index
+  end
+
+  get '/check_submit' do
+    @users = User.all
+    erb :check_submit
+  end
+
+  get '/user/:id' do
+    @photos = User.find(params[:id]).photos
+    erb :delete
   end
 
   get '/delete' do

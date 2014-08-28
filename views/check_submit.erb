@@ -1,0 +1,9 @@
+<html>
+  <body>
+    <% @users.each do |user| %>
+      <div class="user">
+        <a href="/user/<%= user.id %>"><%= user.email %></a> | <%= user.photos.count %>
+      </div>
+    <% end %>
+  </body>
+</html>

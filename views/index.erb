@@ -73,22 +73,6 @@
   </div>
   </body>
 
-  <script type="text/javascript">
-    $(function(){
-      $('.del-btn').click(function(e){
-        e.preventDefault();
-        $this = $(this);
-        var id = $(this).data('id');
-        $.get('/delete/' + id, function(data){
-          res = JSON.parse(data)
-          if(res.success){
-            $this.parent('.item').remove()
-          }
-        })
-      })
-    })
-  </script>
-
   <script src="http://s13.cnzz.com/z_stat.php?id=1253150173&web_id=1253150173" language="JavaScript"></script>
 
 </html>
