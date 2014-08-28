@@ -14,6 +14,13 @@ class Photo
 
   before_destroy :destroy_from_upyun
 
+  def self.random n
+    count = self.count
+    offset = Random.rand(count) + 1
+    offset = count - n if offset + n > count
+    self.skip(offset).limit(n).shuffle
+  end
+
   def destroy_from_upyun
     puts '-' * 30
     puts 'delete from upyun'
