@@ -11,6 +11,7 @@ class App < Sinatra::Base
   set :bind, '0.0.0.0'
 
   post '/create_user' do
+    response['Access-Control-Allow-Origin'] = '*'
     if User.find_or_create_by(email: params[:email])
       { success: true }.to_json
     else
