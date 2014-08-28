@@ -10,6 +10,8 @@ class Photo
   # [0, 1] 0 users, 1 robot
   field :type,       type: Integer
 
+  belongs_to :user
+
   before_destroy :destroy_from_upyun
 
   def destroy_from_upyun

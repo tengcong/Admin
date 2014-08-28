@@ -10,6 +10,14 @@ class App < Sinatra::Base
 
   set :bind, '0.0.0.0'
 
+  get '/create_user' do
+    if User.find_or_create_by(email: params[:email])
+      { success: true }.to_json
+    else
+      { success: false }.to_json
+    end
+  end
+
   get '/list' do
     offset = params[:offset] || 0
     limit = params[:limit] || 10
@@ -43,13 +51,17 @@ class App < Sinatra::Base
 
   post '/submit' do
     response['Access-Control-Allow-Origin'] = '*'
+    user = User.find_or_create_by params[:email]
     origin_url = params[:url]
+
     puts '=' * 30
+    puts user.email
     puts origin_url
+
     uploader = Uploader.instance
-    if !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
-      res = Photo.create(origin_url: origin_url, url: url, type: 1)
+    if user && !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
+      res = user.photos.create(origin_url: origin_url, url: url, type: 1)
+      {success: res}.to_json
     end
-    {success: res}.to_json
   end
 end
