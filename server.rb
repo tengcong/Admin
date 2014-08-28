@@ -21,14 +21,14 @@ class App < Sinatra::Base
 
   get '/list' do
     offset = params[:offset] || 0
-    limit = params[:limit].to_i || 10
+    limit = params[:limit] ? params[:limit].to_i || 21
     @photos = Photo.random(limit)
     {data: @photos}.to_json
   end
 
   get '/' do
     offset = params[:offset] || 0
-    limit = params[:limit].to_i || 21
+    limit = params[:limit] ? params[:limit].to_i || 21
     @photos = Photo.random(limit)
     erb :index
   end
