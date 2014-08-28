@@ -39,7 +39,7 @@ class App < Sinatra::Base
   end
 
   get '/user/:id' do
-    @photos = User.find(params[:id]).photos
+    @photos = User.find(params[:id]).photos.desc('created_at')
     erb :delete
   end
 
