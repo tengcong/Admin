@@ -62,7 +62,12 @@ class App < Sinatra::Base
 
   post '/submit' do
     response['Access-Control-Allow-Origin'] = '*'
-    user = User.find_by email: params[:email]
+    begin
+      user = User.find_by email: params[:email]
+    rescue
+      return {success: false, message: 'login first'}.to_json
+    end
+
     origin_url = params[:url]
 
     puts '=' * 30
