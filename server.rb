@@ -19,6 +19,13 @@ class App < Sinatra::Base
     end
   end
 
+  post '/down' do
+    response['Access-Control-Allow-Origin'] = '*'
+    photo = Photo.find params[:id]
+    res = photo.inc(download_count: 1)
+    { success: res, photo: photo }.to_json
+  end
+
   get '/total_count' do
     {count: Photo.count}.to_json
   end
