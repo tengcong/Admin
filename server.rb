@@ -19,9 +19,15 @@ class App < Sinatra::Base
     end
   end
 
+  get '/total_count' do
+    {count: Photo.count}.to_json
+  end
+
   get '/list' do
-    limit = params[:limit] ? params[:limit].to_i : 21
-    @photos = Photo.random(limit)
+    limit = params[:limit] ? params[:limit].to_i : 100
+    offset = params[:offset] ? params[:offset].to_i : 0
+
+    @photos = Photo.offset(offset).limit(limit)
     {data: @photos}.to_json
   end
 
