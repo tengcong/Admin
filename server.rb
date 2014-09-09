@@ -23,11 +23,11 @@ class App < Sinatra::Base
     response['Access-Control-Allow-Origin'] = '*'
     photo = Photo.find params[:id]
     res = photo.inc(download_count: 1)
-    { success: res, photo: photo }.to_json
+    { code: 0, message: 'success', data: photo }.to_json
   end
 
   get '/total_count' do
-    {count: Photo.count}.to_json
+    { code: 0, message: 'success', data: Photo.count }.to_json
   end
 
   get '/list' do
@@ -35,7 +35,7 @@ class App < Sinatra::Base
     offset = params[:offset] ? params[:offset].to_i : 0
 
     @photos = Photo.offset(offset).limit(limit)
-    {data: @photos}.to_json
+    { code: 0, message: 'success', data: @photos }.to_json
   end
 
   get '/' do
