@@ -71,6 +71,19 @@ class App < Sinatra::Base
     erb :submit
   end
 
+  post '/report/:id' do
+    photo = Photo.find params[:id]
+    res = photo.get_reported
+    {success: res}.to_json
+  end
+
+  get '/report_list' do
+    offset = params[:offset] || 0
+    limit = params[:limit] || 100
+    @photos = Photo.reported.desc('created_at').offset(offset).limit(limit)
+    erb :delete
+  end
+
   post '/submit' do
     response['Access-Control-Allow-Origin'] = '*'
     begin
