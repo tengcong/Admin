@@ -87,7 +87,7 @@ class App < Sinatra::Base
 
     uploader = Uploader.instance
     if user && !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
-      res = user.photos.create(origin_url: origin_url, url: url, type: 1)
+      res = user.photos.create(origin_url: origin_url, url: url, type: 1, download_count: (1..100).to_a.sample)
       {success: res}.to_json
     end
   end
