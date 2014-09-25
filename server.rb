@@ -35,7 +35,7 @@ class App < Sinatra::Base
     offset = params[:offset] ? params[:offset].to_i : 0
 
     @photos = Photo.offset(offset).limit(limit)
-    { code: 0, message: 'success', data: @photos }.to_json
+    { code: 0, message: 'success', data: @photos.shuffle }.to_json
   end
 
   get '/' do
@@ -64,8 +64,7 @@ class App < Sinatra::Base
   get '/delete/:id' do
     photo = Photo.find params[:id]
     res = photo.destroy
-    { code: 0, message: 'success', data: res }.to_json
-
+    { code: 0, message: 'success', data: true }.to_json
   end
 
   get '/submit' do
