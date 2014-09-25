@@ -64,7 +64,7 @@ class App < Sinatra::Base
   get '/delete/:id' do
     photo = Photo.find params[:id]
     res = photo.destroy
-    { code: 0, message: 'success', data: true }.to_json
+    { success: true }.to_json
   end
 
   get '/submit' do
