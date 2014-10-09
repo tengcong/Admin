@@ -10,7 +10,6 @@ class Photo
   # [0, 1] 0 users, 1 robot
   field :type,       type: Integer
 
-  field :download_count, type: Integer, default: 0
   field :like_count, type: Integer, default: 0
 
   field :reported,   type: Boolean, default: false
