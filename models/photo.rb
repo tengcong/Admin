@@ -11,6 +11,7 @@ class Photo
   field :type,       type: Integer
 
   field :download_count, type: Integer, default: 0
+  field :like_count, type: Integer, default: 0
 
   field :reported,   type: Boolean, default: false
 
