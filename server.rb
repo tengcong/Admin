@@ -22,7 +22,7 @@ class App < Sinatra::Base
   post '/like' do
     response['Access-Control-Allow-Origin'] = '*'
     photo = Photo.find params[:id]
-    res = photo.inc(download_count: 1)
+    res = photo.inc(like_count: 1)
     { code: 0, message: 'success', data: photo }.to_json
   end
 
@@ -100,7 +100,7 @@ class App < Sinatra::Base
 
     uploader = Uploader.instance
     if user && !Photo.where(origin_url: origin_url).exists? && url = uploader.upload_with(origin_url)
-      res = user.photos.create(origin_url: origin_url, url: url, type: 1, download_count: (1..100).to_a.sample)
+      res = user.photos.create(origin_url: origin_url, url: url, type: 1, like_count: (1..100).to_a.sample)
       {success: res}.to_json
     end
   end
