@@ -19,7 +19,7 @@ class App < Sinatra::Base
     end
   end
 
-  post '/down' do
+  post '/like' do
     response['Access-Control-Allow-Origin'] = '*'
     photo = Photo.find params[:id]
     res = photo.inc(download_count: 1)
