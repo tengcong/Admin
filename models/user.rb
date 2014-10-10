@@ -10,7 +10,7 @@ class User
 
   has_many :photos
 
-  has_many :logs
+  has_many :logs, dependent: :destroy
 
   def like photo
     if photo
