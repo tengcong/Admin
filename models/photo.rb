@@ -18,7 +18,7 @@ class Photo
 
   before_destroy :destroy_from_upyun
 
-  scope :reported, -> { where(:reported.ne => 0) }
+  scope :reported, -> { where(:report_count.ne => 0) }
 
   def self.random n
     count = self.count
