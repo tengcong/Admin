@@ -46,8 +46,17 @@ class App < Sinatra::Base
 
   ########### these are APIs for mobile client ###########
 
+
   get '/pengpeng' do
-    { code: 0, message: 'success', data: Pengpeng.get_result }.to_json
+    current_user = User.find_or_create_by(uniq_token: params[:uniq_token]) if params[:uniq_token]
+
+    result = Pengpeng.get_result
+
+    if current_user
+      current_user.logs.create content: "pengpeng: #{result}"
+    end
+
+    { code: 0, message: 'success', data: result }.to_json
   end
 
   get '/total_count' do
@@ -56,12 +65,20 @@ class App < Sinatra::Base
 
   post '/like' do
     response['Access-Control-Allow-Origin'] = '*'
+    current_user = User.find_or_create_by(uniq_token: params[:uniq_token]) if params[:uniq_token]
+
     photo = Photo.find params[:id]
-    res = photo.inc(like_count: 1)
-    { code: 0, message: 'success', data: photo }.to_json
+    if current_user
+      current_user.like photo
+    else
+      photo.inc(like_count: 1)
+    end
+    { code: 0, message: 'success', data: true }.to_json
   end
 
   get '/list' do
+    User.find_or_create_by(uniq_token: params[:uniq_token]) if params[:uniq_token]
+
     limit = params[:limit] ? params[:limit].to_i : 100
     offset = params[:offset] ? params[:offset].to_i : 0
 
@@ -69,23 +86,15 @@ class App < Sinatra::Base
     { code: 0, message: 'success', data: @photos.shuffle }.to_json
   end
 
-  get '/delete/:id' do
-    photo = Photo.find params[:id]
-    res = photo.destroy
-    { success: true }.to_json
-  end
-
   post '/report/:id' do
+    current_user = User.find_or_create_by(uniq_token: params[:uniq_token]) if params[:uniq_token]
     photo = Photo.find params[:id]
-    res = photo.get_reported
-    { code: 0, message: 'success', data: res }.to_json
-  end
-
-  get '/report_list' do
-    offset = params[:offset] || 0
-    limit = params[:limit] || 100
-    @photos = Photo.reported.desc('created_at').offset(offset).limit(limit)
-    erb :delete
+    if current_user
+      current_user.report photo
+    else
+      photo.get_reported
+    end
+    { code: 0, message: 'success', data: true }.to_json
   end
 
   ############# these are APIs for mobile clients ############
@@ -118,6 +127,20 @@ class App < Sinatra::Base
     @photos = Photo.desc('created_at').offset(offset).limit(limit)
     erb :delete
   end
+
+  get '/report_list' do
+    offset = params[:offset] || 0
+    limit = params[:limit] || 100
+    @photos = Photo.reported.desc(:reported).offset(offset).limit(limit)
+    erb :delete
+  end
+
+  get '/delete/:id' do
+    photo = Photo.find params[:id]
+    res = photo.destroy
+    { success: true }.to_json
+  end
+
 
   ############# these are for PC web ############
 end

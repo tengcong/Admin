@@ -12,13 +12,13 @@ class Photo
 
   field :like_count, type: Integer, default: 0
 
-  field :reported,   type: Boolean, default: false
+  field :report_count,   type: Integer, default: 0
 
   belongs_to :user
 
   before_destroy :destroy_from_upyun
 
-  scope :reported, -> { where(reported: true) }
+  scope :reported, -> { where(:reported.ne => 0) }
 
   def self.random n
     count = self.count
@@ -34,7 +34,7 @@ class Photo
   end
 
   def get_reported
-    set reported: true
+    inc report_count: 1
   end
 
 end
