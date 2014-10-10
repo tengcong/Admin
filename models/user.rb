@@ -5,6 +5,9 @@ class User
   include Mongoid::Timestamps
 
   field :email, type: String
+
+  field :uniq_token, type: String
+
   has_many :photos
 
 end
