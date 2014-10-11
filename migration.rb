@@ -14,8 +14,6 @@ Dir['seeds/*.txt'].each do |file_name|
 
     line.chomp!
 
-    line << "!retina"
-
     Photo.find_or_create_by(url: line, type: 1)
   end
 
