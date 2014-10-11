@@ -82,7 +82,7 @@ class App < Sinatra::Base
     limit = params[:limit] ? params[:limit].to_i : 100
     offset = params[:offset] ? params[:offset].to_i : 0
 
-    @photos = Photo.offset(offset).limit(limit).each{ |p| p.url << "!retina" }
+    @photos = Photo.offset(offset).limit(limit).to_a.each{ |p| p.url << "!retina" }
     { code: 0, message: 'success', data: @photos.shuffle }.to_json
   end
 
