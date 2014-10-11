@@ -97,6 +97,19 @@ class App < Sinatra::Base
     { code: 0, message: 'success', data: true }.to_json
   end
 
+  post '/notlike/:id' do
+    response['Access-Control-Allow-Origin'] = '*'
+    current_user = User.find_or_create_by(uniq_token: params[:uniq_token]) if params[:uniq_token]
+
+    photo = Photo.find params[:id]
+    if current_user
+      current_user.notlike photo
+    else
+      photo.inc(like_count: -1)
+    end
+    { code: 0, message: 'success', data: true }.to_json
+  end
+
   ############# these are APIs for mobile clients ############
 
   ############# these are for PC web ############
