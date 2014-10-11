@@ -18,6 +18,8 @@ class Photo
 
   before_destroy :destroy_from_upyun
 
+  before_create :set_like_count
+
   scope :reported, -> { where(:report_count.gt => 0) }
 
   def self.random n
@@ -35,6 +37,10 @@ class Photo
 
   def get_reported
     inc report_count: 1
+  end
+
+  def set_like_count
+    self.like_count = (1..100).to_a.sample
   end
 
 end
