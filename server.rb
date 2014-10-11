@@ -73,7 +73,7 @@ class App < Sinatra::Base
     else
       photo.inc(like_count: 1)
     end
-    { code: 0, message: 'success', data: true }.to_json
+    { code: 0, message: 'success', data: photo }.to_json
   end
 
   get '/list' do
@@ -97,7 +97,7 @@ class App < Sinatra::Base
     { code: 0, message: 'success', data: true }.to_json
   end
 
-  post '/notlike/:id' do
+  post '/notlike' do
     response['Access-Control-Allow-Origin'] = '*'
     current_user = User.find_or_create_by(uniq_token: params[:uniq_token]) if params[:uniq_token]
 
@@ -107,7 +107,7 @@ class App < Sinatra::Base
     else
       photo.inc(like_count: -1)
     end
-    { code: 0, message: 'success', data: true }.to_json
+    { code: 0, message: 'success', data: photo }.to_json
   end
 
   ############# these are APIs for mobile clients ############
