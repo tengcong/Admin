@@ -3,11 +3,10 @@ require 'open-uri'
 require 'mongoid'
 
 # mongoid conf
-Mongoid.load!("config/mongoid.yml", 'development')
+Mongoid.load!("./config/mongoid.yml", 'development')
 
 # models
 Dir["./models/*.rb"].each { |f| require f }
-
 
 BASE = "http://www.qqtn.com"
 SURFIX = ".html"
@@ -39,6 +38,7 @@ PATHS = [
 # puts Bq.limit(100).map &:attributes
 
 BqType.destroy_all
+BqPackage.destroy_all
 Bq.destroy_all
 
 PATHS.each do |path|
@@ -62,15 +62,27 @@ PATHS.each do |path|
       begin
         doc = Nokogiri::HTML(open(url.gsub(/(\d+)/, "#{page}")))
         doc.css('.liebiao_left .fo_link').each do |link|
+
+          package_name = link.text.strip
           detail_page_link = link.attr('href')
 
-          detail_doc = Nokogiri::HTML(open("#{BASE}#{detail_page_link}"))
-          detail_doc.css('.m_xinmain img').each do |img|
-            img_url = img.attr('src')
-            image_url = img_url[/http/] ? img_url : "#{BASE}#{img_url}"
-            bq_type.bqs.find_or_create_by origin_url: "#{img_url}"
+          if bq_package = BqPackage.where(name: package_name, url: detail_page_link).first
+            bq_type.bq_packages << bq_package
+          else
+            bq_package = bq_type.bq_packages.create(name: package_name, url: detail_page_link)
 
-            puts image_url
+            detail_doc = Nokogiri::HTML(open("#{BASE}#{detail_page_link}"))
+            detail_doc.css('.m_xinmain img').each do |img|
+              img_url = img.attr('src')
+              image_url = img_url[/http/] ? img_url : "#{BASE}#{img_url}"
+              bq_package.bqs.find_or_create_by origin_url: "#{img_url}"
+
+
+              puts BqType.count
+              puts BqPackage.count
+              puts Bq.count
+
+            end
           end
         end
       rescue Exception => e
