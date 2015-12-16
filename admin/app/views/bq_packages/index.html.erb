@@ -2,6 +2,8 @@
 
 <h1>Listing Bq Packages</h1>
 
+<%= link_to 'New Bq package', new_bq_package_path %>
+
 <table>
   <thead>
     <tr>
@@ -13,7 +15,9 @@
     <% @bq_packages.each do |bq_package| %>
       <tr>
         <td><%= bq_package.name %></td>
-        <td><%= bq_package.url %></td>
+        <td>
+          <%= image_tag bq_package.bqs[1].try(:origin_url), width: 100, height: 100 %>
+        </td>
         <td><%= link_to 'Show', bq_package %></td>
         <td><%= link_to 'Edit', edit_bq_package_path(bq_package) %></td>
         <td><%= link_to 'Destroy', bq_package, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Bq package', new_bq_package_path %>
+<%= paginate @bq_packages %>

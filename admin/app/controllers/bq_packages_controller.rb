@@ -4,12 +4,13 @@ class BqPackagesController < ApplicationController
   # GET /bq_packages
   # GET /bq_packages.json
   def index
-    @bq_packages = BqPackage.all
+    @bq_packages = BqPackage.page params[:page]
   end
 
   # GET /bq_packages/1
   # GET /bq_packages/1.json
   def show
+    @bqs = @bq_package.bqs.page params[:page]
   end
 
   # GET /bq_packages/new

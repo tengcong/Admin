@@ -1,4 +1,34 @@
 <p id="notice"><%= notice %></p>
 
+
 <%= link_to 'Edit', edit_bq_type_path(@bq_type) %> |
 <%= link_to 'Back', bq_types_path %>
+
+<br>
+<br>
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bq_packages.each do |package| %>
+      <tr>
+        <td><%= package.name %></td>
+        <td><%= package.url %></td>
+        <td>
+          <%= link_to [@bq_type, package] do %>
+            <%= image_tag package.bqs[1].try(:origin_url), width: 100, height: 100 %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @bq_packages %>

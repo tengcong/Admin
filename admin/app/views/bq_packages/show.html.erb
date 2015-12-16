@@ -2,3 +2,29 @@
 
 <%= link_to 'Edit', edit_bq_package_path(@bq_package) %> |
 <%= link_to 'Back', bq_packages_path %>
+
+<br>
+<br>
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bqs.each do |bq| %>
+      <tr>
+        <td>
+          <%= image_tag bq.try(:origin_url) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @bqs %>
+

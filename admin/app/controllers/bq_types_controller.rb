@@ -10,6 +10,7 @@ class BqTypesController < ApplicationController
   # GET /bq_types/1
   # GET /bq_types/1.json
   def show
+    @bq_packages = @bq_type.bq_packages.page params[:page]
   end
 
   # GET /bq_types/new
