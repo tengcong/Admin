@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>表情列表</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bqs.each do |bq| %>
+      <tr>
+        <td>
+          <%= image_tag bq.origin_url, width: 100, height: 100 %>
+        </td>
+        <td><%= link_to 'Show', bq %></td>
+        <td><%= link_to 'Edit', edit_bq_path(bq) %></td>
+        <td><%= link_to 'Destroy', bq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bq', new_bq_path %>

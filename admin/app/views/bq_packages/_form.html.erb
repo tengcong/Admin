@@ -1,0 +1,17 @@
+<%= form_for(@bq_package) do |f| %>
+  <% if @bq_package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bq_package.errors.count, "error") %> prohibited this bq_package from being saved:</h2>
+
+      <ul>
+      <% @bq_package.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
