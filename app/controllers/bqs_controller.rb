@@ -4,7 +4,7 @@ class BqsController < ApplicationController
   # GET /bqs
   # GET /bqs.json
   def index
-    @bqs = Bq.all.limit(100)
+    @bqs = Bq.page params[:page]
   end
 
   # GET /bqs/1

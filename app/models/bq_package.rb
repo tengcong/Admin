@@ -7,4 +7,8 @@ class BqPackage
 
   field :name
   field :url
+
+  field :published, type: Boolean, default: false
+
+  scope :desc, -> { order(created_at: :desc) }
 end

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
 
   root to: "bq_types#index"
+  resources :bqs
 end
