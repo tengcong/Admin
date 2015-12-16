@@ -20,7 +20,22 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bullet' # n+1 query limit
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'quiet_assets' # disabled assets log
+  gem 'pry-rails'
+
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'meta_request'
+  gem 'binding_of_caller'
+  gem 'http_logger'
+
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-puma'
 end
 
+gem 'puma'
