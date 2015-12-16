@@ -10,5 +10,14 @@ class BqPackage
 
   field :published, type: Boolean, default: false
 
-  scope :desc, -> { order(created_at: :desc) }
+  scope :desc, -> { order(updated_at: :desc) }
+  scope :published, -> { where(published: true) }
+
+  def publish!
+    update published: true
+  end
+
+  def unpublish!
+    update published: false
+  end
 end

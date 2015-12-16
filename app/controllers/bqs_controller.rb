@@ -1,14 +1,10 @@
 class BqsController < ApplicationController
   before_action :set_bq, only: [:show, :edit, :update, :destroy]
 
-  # GET /bqs
-  # GET /bqs.json
   def index
     @bqs = Bq.page params[:page]
   end
 
-  # GET /bqs/1
-  # GET /bqs/1.json
   def show
   end
 
