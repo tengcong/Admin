@@ -271,6 +271,7 @@ DEPENDENCIES
   mongoid
   mongoid-simple-tags
   mongoid_orderable
+  nokogiri
   pry-rails
   puma
   quiet_assets
