@@ -29,9 +29,12 @@ namespace :scrawler do
         end
 
         doc = open_url(pic_path)
-        src = doc.css('#picBody img').attr('src').value
 
-        album.photos.create url: src
+        begin
+          src = doc.css('#picBody img').attr('src').value
+          album.photos.create url: src
+        rescue
+        end
       end
     end
   end
