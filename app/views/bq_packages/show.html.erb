@@ -18,14 +18,18 @@
 
   <tbody>
     <tr>
-      <td><%= @bq_package.tags %></td>
+      <td>标签：</td>
+      <td>
+        <% @bq_package.tags.each do |tag| %>
+          <%= link_to tag, bq_packages_path(tag: tag) %>
+        <% end %>
+      </td>
     </tr>
 
     <% @bqs.each do |bq| %>
       <tr>
         <td>
           <%= image_tag bq.try(:origin_url) %>
-
         </td>
         <td>
           <%= link_to '删除', bq, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>

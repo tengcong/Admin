@@ -2,3 +2,16 @@
 @import "bootstrap";
 
 @import "select2";
+
+a.published, a.unpublished{
+  display: inline-block;
+  color: white;
+  padding: 0 5px;
+}
+
+a.published{
+  background: #FA1D00;
+}
+a.unpublished{
+  background: #33FF0F;
+}
