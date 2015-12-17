@@ -10,4 +10,10 @@ namespace :file do
       end
     end
   end
+
+  task orderable: :environment do
+    BqPackage.desc.each do |package|
+      package.save
+    end
+  end
 end

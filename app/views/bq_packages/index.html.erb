@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1>全部表情包</h1>
 
-<h1>全部表情包</h1>
-
-<%= link_to '新建表情包', new_bq_package_path %>
-
-<%= render 'package', bq_packages: @bq_packages %>
+  <%= render 'package', bq_packages: @bq_packages %>
+</div>

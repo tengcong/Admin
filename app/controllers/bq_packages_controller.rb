@@ -6,7 +6,7 @@ class BqPackagesController < ApplicationController
   end
 
   def index
-    @bq_packages = BqPackage.desc.page(params[:page])
+    @bq_packages = BqPackage.order(position: :asc).page(params[:page])
 
     if tag = params[:tag]
       @bq_packages = @bq_packages.tagged_with tag
@@ -59,6 +59,10 @@ class BqPackagesController < ApplicationController
     end
   end
 
+  def batch_destroy
+    render json: {success: BqPackage.any_in(id: params[:ids]).destroy_all}
+  end
+
   def publish
     @bq_package = BqPackage.find(params[:bq_package_id])
     @bq_package.publish!
@@ -69,6 +73,11 @@ class BqPackagesController < ApplicationController
     @bq_package = BqPackage.find(params[:bq_package_id])
     @bq_package.unpublish!
     render js: 'window.location.reload()'
+  end
+
+  def move_to
+    @bq_package = BqPackage.find(params[:bq_package_id])
+    render json: {data: @bq_package.move_to!(params[:to])}
   end
 
   private

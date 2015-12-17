@@ -15,3 +15,42 @@ a.published{
 a.unpublished{
   background: #33FF0F;
 }
+
+#items{
+  padding: 20px;
+
+  .item{
+    list-style: none;
+    .select{
+    }
+    .name{
+      margin-left: 20px;
+      width: 150px;
+    }
+    .tags{
+      width: 150px;
+      margin-left: 20px;
+    }
+    .thumbnail{
+      margin-left: 20px;
+      width: 100px;
+    }
+
+    .controls{
+      width: 100px;
+      margin-left: 20px;
+    }
+  }
+}
+.my-handle {
+  cursor: move;
+  cursor: -webkit-grabbing;
+}
+.sortable-ghost{
+  opacity: 0.4;
+}
+
+.sortable-chosen{
+  color: #fff;
+  background-color: #eee;
+}

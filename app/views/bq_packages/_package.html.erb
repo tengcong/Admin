@@ -1,38 +1,65 @@
-<table class='table'>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="buttons">
+  <%= link_to '新建表情包', new_bq_package_path, class: 'btn btn-default' %>
+  <%= link_to '全部删除', "#", class: 'btn btn-danger', id: 'batch_destroy' %>
+</div>
 
-  <tbody>
-    <% bq_packages.each do |bq_package| %>
-      <tr>
-        <td><%= bq_package.name %></td>
-        <td>
+<ul id='items'>
+  <% bq_packages.each do |bq_package| %>
+
+    <li class='item clearfix' data-position="<%= bq_package.position %>" data-id="<%= bq_package.id %>">
+
+    <div class="select pull-left">
+      <input type="checkbox" name='package' id='p_<%= bq_package.id %>' value='<%= bq_package.id %>'>
+    </div>
+
+      <div class="name pull-left">
+        <label for="p_<%= bq_package.id %>">
+          <%= bq_package.name %>
+        </label>
+      </div>
+
+      <div class="tags pull-left">
+        标签：
+        <div>
           <% bq_package.tags.each do |tag| %>
             <%= link_to tag, bq_packages_path(tag: tag) %>
           <% end %>
-        </td>
-        <td>
-          <%= link_to bq_package do %>
-            <%= image_tag bq_package.bqs[1].try(:origin_url), width: 100, height: 100 %>
-          <% end %>
-        </td>
+        </div>
+      </div>
 
-        <% if bq_package.published %>
-          <td><%= link_to '下架', bq_package_unpublish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'published' %></td>
-        <% else %>
-          <td><%= link_to '发布', bq_package_publish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'unpublished' %></td>
+      <div class="thumbnail pull-left">
+        <%= link_to bq_package do %>
+          <%= image_tag bq_package.bqs[1].try(:origin_url), width: 100, height: 100 %>
         <% end %>
+      </div>
 
-        <td><%= link_to '编辑', edit_bq_package_path(bq_package) %></td>
-        <td><%= link_to '删除', bq_package, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="controls pull-left">
 
-<br>
+        <div class="div">
+          <% if bq_package.published %>
+            <%= link_to '下架', bq_package_unpublish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'published' %>
+          <% else %>
+              <%= link_to '发布', bq_package_publish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'unpublished' %>
+          <% end %>
+        </div>
+
+        <div>
+          <%= link_to '编辑', edit_bq_package_path(bq_package) %>
+        </div>
+
+        <div>
+          <%= link_to '删除', bq_package, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+        </div>
+      </div>
+
+      <div class="handle pull-right">
+        <span class="my-handle">::</span>
+      </div>
+
+    </li>
+
+  <% end %>
+</ul>
+
 
 <%= paginate bq_packages %>

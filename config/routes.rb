@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     post :unpublish
 
     get :published, on: :collection
+
+    post :move_to
+    delete :batch_destroy, on: :collection
   end
 
   resources :bq_types do
