@@ -1,6 +1,8 @@
 <div class="buttons">
   <%= link_to '新建表情包', new_bq_package_path, class: 'btn btn-default' %>
   <%= link_to '全部删除', "#", class: 'btn btn-danger', id: 'batch_destroy' %>
+  <%= link_to '批量置顶', "#", class: 'btn btn-success batch-move', data: { direction: 'top' } %>
+  <%= link_to '批量置底', "#", class: 'btn btn-warning batch-move', data: { direction: 'bottom' } %>
 </div>
 
 <ul id='items'>

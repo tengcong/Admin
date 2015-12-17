@@ -8,6 +8,33 @@
 
 $(function(){
 
+  $(".batch-move").click(function(e){
+    e.preventDefault();
+
+    if(confirm('确定移到顶部？')){
+      var ids = $('#items input[type=checkbox]:checked');
+
+      var arr = [];
+      ids.map(function(i, e){
+        arr.push($(e).val());
+      });
+
+      $.ajax({
+        url: 'bq_packages/batch_move',
+        method: 'patch',
+        data: { ids: arr, direction: $(this).data('direction') },
+        success: function(data){
+          if(data.success){
+            window.location.reload();
+          }else{
+            console.log(data);
+          }
+        }
+      });
+
+    }
+  });
+
   $("#batch_destroy").click(function(e){
     e.preventDefault();
 

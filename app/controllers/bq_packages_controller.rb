@@ -59,6 +59,14 @@ class BqPackagesController < ApplicationController
     end
   end
 
+  def batch_move
+    BqPackage.any_in(id: params[:ids]).each do |package|
+      package.move_to! params[:direction].to_sym
+    end
+
+    render json: { success: true }
+  end
+
   def batch_destroy
     render json: {success: BqPackage.any_in(id: params[:ids]).destroy_all}
   end

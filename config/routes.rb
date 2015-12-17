@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     post :move_to
     delete :batch_destroy, on: :collection
+    patch :batch_move, on: :collection
   end
 
   resources :bq_types do
