@@ -54,6 +54,7 @@ class BqsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to bqs_url, notice: 'Bq was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render js: 'window.location.reload()' }
     end
   end
 

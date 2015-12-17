@@ -12,6 +12,16 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :tags %><br />
+      <%= f.select :tags, BqPackage.tag_list, {include_hidden: false}, multiple: true, class: 'form-control' %>
+    </div>
+
+    <%= f.submit :save, class: 'btn btn-default' %>
   </div>
 <% end %>

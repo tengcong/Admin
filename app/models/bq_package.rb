@@ -1,5 +1,6 @@
 class BqPackage
   include Mongoid::Document
+  include Mongoid::Document::Taggable
   include Mongoid::Timestamps
 
   belongs_to :bq_type

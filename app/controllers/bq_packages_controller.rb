@@ -6,24 +6,24 @@ class BqPackagesController < ApplicationController
   end
 
   def index
-    @bq_packages = BqPackage.page params[:page]
+    @bq_packages = BqPackage.desc.page(params[:page])
+
+    if tag = params[:tag]
+      @bq_packages = @bq_packages.tagged_with tag
+    end
   end
 
   def show
     @bqs = @bq_package.bqs.page params[:page]
   end
 
-  # GET /bq_packages/new
   def new
     @bq_package = BqPackage.new
   end
 
-  # GET /bq_packages/1/edit
   def edit
   end
 
-  # POST /bq_packages
-  # POST /bq_packages.json
   def create
     @bq_package = BqPackage.new(bq_package_params)
 
@@ -38,8 +38,6 @@ class BqPackagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /bq_packages/1
-  # PATCH/PUT /bq_packages/1.json
   def update
     respond_to do |format|
       if @bq_package.update(bq_package_params)
@@ -52,28 +50,24 @@ class BqPackagesController < ApplicationController
     end
   end
 
-  # DELETE /bq_packages/1
-  # DELETE /bq_packages/1.json
   def destroy
     @bq_package.destroy
     respond_to do |format|
       format.html { redirect_to bq_type_path(@bq_package.bq_type), notice: 'Bq package was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render js: "window.location.reload()" }
     end
   end
 
   def publish
     @bq_package = BqPackage.find(params[:bq_package_id])
     @bq_package.publish!
-
-
     render js: 'window.location.reload()'
   end
 
   def unpublish
     @bq_package = BqPackage.find(params[:bq_package_id])
     @bq_package.unpublish!
-
     render js: 'window.location.reload()'
   end
 
@@ -85,6 +79,6 @@ class BqPackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bq_package_params
-      params[:bq_package]
+      params[:bq_package].permit(:name, tags: [])
     end
 end

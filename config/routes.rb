@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
   resources :bqs
 
-  root to: "bq_packages#published"
+  root to: "bq_packages#index"
 end
