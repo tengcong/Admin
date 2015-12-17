@@ -1,6 +1,13 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
-  <h1>全部表情包</h1>
+  <h1>
+
+    <% if params[:tag] %>
+      标签为： <span style='color: lightblue'><%= params[:tag] %></span>   的表情包
+    <% else %>
+      全部表情包
+    <% end %>
+  </h1>
 
   <%= render 'package', bq_packages: @bq_packages %>
 </div>

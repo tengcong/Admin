@@ -1,43 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_bq_package_path(@bq_package) %> |
-<%= link_to 'Back', :back %>
+  <%= link_to 'Edit', edit_bq_package_path(@bq_package) %> |
+  <%= link_to 'Back', :back %>
 
-<br>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
 
 
-<table class='table'>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-  <tbody>
+    <tbody>
     <tr>
       <td>标签：</td>
       <td>
         <% @bq_package.tags.each do |tag| %>
           <%= link_to tag, bq_packages_path(tag: tag) %>
-        <% end %>
+      <% end %>
       </td>
     </tr>
 
     <% @bqs.each do |bq| %>
       <tr>
-        <td>
-          <%= image_tag bq.try(:origin_url) %>
-        </td>
-        <td>
-          <%= link_to '删除', bq, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <td>
+        <%= image_tag bq.try(:origin_url) %>
+      </td>
+      <td>
+        <%= link_to '删除', bq, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+      </td>
+    </tr>
+  <% end %>
+    </tbody>
+  </table>
 
-<%= paginate @bqs %>
+  <%= paginate @bqs %>
 
+</div>
