@@ -94,8 +94,6 @@ $(function(){
     })
 
     var el = document.getElementById('items');
-
-
     var sortable = Sortable.create(el, {
 
       dragable: ".item",
@@ -105,25 +103,26 @@ $(function(){
       handle: '.my-handle',
 
       onEnd: function(evt){
-
-        var $item = $(evt.item);
-        var from, to;
-        var id = $item.data('id');
-        if(evt.oldIndex < evt.newIndex){
-          from = $item.data('position')
-          to = $item.prev().data('position')
-        }else{
-          from = $item.data('position')
-          to = $item.next().data('position')
-        }
-
-        $.post('/' + collection + '/' + id + '/move_to', { to: to }, function(data){
-          if(data.data){
-            console.log('done');
+        if(evt.oldIndex != evt.newIndex){
+          var $item = $(evt.item);
+          var from, to;
+          var id = $item.data('id');
+          if(evt.oldIndex < evt.newIndex){
+            from = $item.data('position')
+            to = $item.prev().data('position')
           }else{
-            alert('卧槽出错了');
+            from = $item.data('position')
+            to = $item.next().data('position')
           }
-        })
+
+          $.post('/' + collection + '/' + id + '/move_to', { to: to }, function(data){
+            if(data.data){
+              console.log('done');
+            }else{
+              alert('卧槽出错了');
+            }
+          })
+        }
       }
     });
   }

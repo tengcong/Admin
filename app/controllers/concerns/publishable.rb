@@ -2,7 +2,7 @@ module Publishable
   extend ActiveSupport::Concern
 
   def published
-    @collection = model.published.desc.page params[:page]
+    @collection = model.published.ordered.page params[:page]
   end
 
   def publish

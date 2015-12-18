@@ -13,7 +13,7 @@ class BqPackage
   field :name
   field :url
 
-  scope :desc, -> { order(updated_at: :desc) }
+  scope :ordered, -> { order(position: :asc) }
 
   def self.search(q)
     self.any_of({ name: /.*#{q}.*/ })
