@@ -1,7 +1,13 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <h1>套图集合</h1>
+  <h1>
+    <% if params[:tag] %>
+      标签为： <span style='color: lightblue'><%= params[:tag] %></span>   的套图
+    <% else %>
+      套图集合
+    <% end %>
+  </h1>
 
   <%= render "album", albums: @albums %>
 </div>
