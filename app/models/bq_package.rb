@@ -3,7 +3,6 @@ class BqPackage
   include Mongoid::Document::Taggable
   include Mongoid::Timestamps
   include Mongoid::Orderable
-
   include Mongoid::Publishable
 
   orderable
@@ -15,4 +14,8 @@ class BqPackage
   field :url
 
   scope :desc, -> { order(updated_at: :desc) }
+
+  def self.search(q)
+    self.any_of({ name: /.*#{q}.*/ })
+  end
 end

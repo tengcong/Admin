@@ -18,4 +18,8 @@ module BasicControl
     render json: {data: model.find(params[key]).move_to!(params[:to])}
   end
 
+  def search
+    render json: model.search(params[:q])
+  end
+
 end

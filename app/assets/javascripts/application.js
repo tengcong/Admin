@@ -4,70 +4,95 @@
 //= require turbolinks
 //= require select2
 //= require sortable
+//= require typeahead
 //= require_tree .
 
 $(function(){
 
-  $(".batch-move").click(function(e){
-    e.preventDefault();
-
-    if(confirm('确定移到顶部？')){
-
-      var ids = $('#items input[type=checkbox]:checked');
-      var collection = $('#items').data('collection');
-
-      var arr = [];
-      ids.map(function(i, e){
-        arr.push($(e).val());
-      });
-
-      $.ajax({
-        url: '/' + collection + '/batch_move',
-        method: 'patch',
-        data: { ids: arr, direction: $(this).data('direction') },
-        success: function(data){
-          if(data.success){
-            window.location.reload();
-          }else{
-            console.log(data);
-          }
-        }
-      });
-
-    }
-  });
-
-  $("#batch_destroy").click(function(e){
-    e.preventDefault();
+  if($("#items").length > 0){
 
     var collection = $('#items').data('collection');
 
-    if(confirm('确定删除？')){
-      var ids = $('#items input[type=checkbox]:checked');
+    var searchResult = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
 
-      var arr = [];
-      ids.map(function(i, e){
-        arr.push($(e).val());
-      });
+      //prefetch: '../data/films/post_1960.json',
+      remote: {
+        url: '/' + collection + '/search?q=%QUERY',
+        wildcard: '%QUERY'
+      }
+    });
 
-      $.ajax({
-        url: '/' + collection + '/batch_destroy',
-        method: 'delete',
-        data: { ids: arr },
-        success: function(data){
-          if(data.success){
-            window.location.reload();
-          }else{
-            console.log(data);
+    $('#searchBar .typeahead').typeahead(null, {
+      name: 'search-result',
+      display: function(data){
+        value = data['name'] || data['title']
+        return value;
+      },
+      source: searchResult
+    });
+
+    $('#searchBar .typeahead').bind('typeahead:select', function(ev, suggestion) {
+      window.location.href = '/' + collection + '/' + suggestion['_id']['$oid'];
+    });
+
+    $(".batch-move").click(function(e){
+      e.preventDefault();
+
+      if(confirm('确定移到顶部？')){
+
+        var ids = $('#items input[type=checkbox]:checked');
+
+        var arr = [];
+        ids.map(function(i, e){
+          arr.push($(e).val());
+        });
+
+        $.ajax({
+          url: '/' + collection + '/batch_move',
+          method: 'patch',
+          data: { ids: arr, direction: $(this).data('direction') },
+          success: function(data){
+            if(data.success){
+              window.location.reload();
+            }else{
+              console.log(data);
+            }
           }
-        }
-      });
-    }
-  })
+        });
 
-  var el = document.getElementById('items');
+      }
+    });
 
-  if(el){
+    $("#batch_destroy").click(function(e){
+      e.preventDefault();
+
+      if(confirm('确定删除？')){
+        var ids = $('#items input[type=checkbox]:checked');
+
+        var arr = [];
+        ids.map(function(i, e){
+          arr.push($(e).val());
+        });
+
+        $.ajax({
+          url: '/' + collection + '/batch_destroy',
+          method: 'delete',
+          data: { ids: arr },
+          success: function(data){
+            if(data.success){
+              window.location.reload();
+            }else{
+              console.log(data);
+            }
+          }
+        });
+      }
+    })
+
+    var el = document.getElementById('items');
+
 
     var sortable = Sortable.create(el, {
 
@@ -78,8 +103,6 @@ $(function(){
       handle: '.my-handle',
 
       onEnd: function(evt){
-
-        var collection = $(el).data('collection');
 
         var $item = $(evt.item);
         var from, to;

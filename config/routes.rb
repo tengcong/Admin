@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     post :publish
     post :unpublish
 
+    collection do
+      get :search
+    end
+
     get :published, on: :collection
 
     post :move_to
@@ -17,6 +21,10 @@ Rails.application.routes.draw do
     resources :bqs
     post :publish
     post :unpublish
+
+    collection do
+      get :search
+    end
 
     get :published, on: :collection
 
