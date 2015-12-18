@@ -3,37 +3,45 @@ require 'open-uri'
 namespace :scrawler do
   base = "http://www.27270.com/"
 
+  # http://www.du114.com/tags.html
+
   task create_photos: :environment do
-    Album.all.each do |album|
+    Album.where(tags: []).each do |album|
       doc = open_url(album.url)
 
-      begin
-        total_count = doc.css('#pageinfo').attr('pageinfo').value.to_i
-      rescue
-        total_count = 1
-      end
-
-      tags = []
-      doc.css('.photo-fbl a').each do |tag|
-        tags << tag.attr('title')
-      end
-
-      album.tags = tags
-      album.save
-
-      (1..total_count).each do |page_num|
-        if page_num == 1
-          pic_path = album.url
-        else
-          pic_path = album.url.gsub('.html', "_#{page_num}.html")
-        end
-
-        doc = open_url(pic_path)
+      if doc
 
         begin
-          src = doc.css('#picBody img').attr('src').value
-          album.photos.create url: src
+          total_count = doc.css('#pageinfo').attr('pageinfo').value.to_i
         rescue
+          total_count = 1
+        end
+
+        tags = []
+        doc.css('.photo-fbl a').each do |tag|
+          tags << tag.attr('title')
+        end
+
+        album.tags = tags
+        album.save
+
+        (1..total_count).each do |page_num|
+          if page_num == 1
+            pic_path = album.url
+          else
+            pic_path = album.url.gsub('.html', "_#{page_num}.html")
+          end
+
+          doc = open_url(pic_path)
+
+          if doc
+
+            begin
+              src = doc.css('#picBody img').attr('src').value
+              album.photos.create url: src
+            rescue
+            end
+          end
         end
       end
     end
@@ -82,9 +90,13 @@ namespace :scrawler do
 end
 
 def open_url url
-  page = open(url).read
-  page.force_encoding("gbk")
-  page.encode!("utf-8")
+  begin
+    page = open(url).read
+    page.force_encoding("gbk")
+    page.encode!("utf-8")
 
-  Nokogiri::HTML.parse page
+    Nokogiri::HTML.parse page
+  rescue
+    nil
+  end
 end
