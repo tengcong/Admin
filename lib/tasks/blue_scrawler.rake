@@ -10,7 +10,6 @@ namespace :scrawler do
       doc = open_url(album.url)
 
       if doc
-
         begin
           total_count = doc.css('#pageinfo').attr('pageinfo').value.to_i
         rescue

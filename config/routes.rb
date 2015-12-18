@@ -1,43 +1,31 @@
 Rails.application.routes.draw do
 
-  resources :photos
-  resources :albums do
-    resources :photos
+  concern :listable do
     post :publish
     post :unpublish
+    post :move_to
 
     collection do
       get :search
+      get :published
+      patch :batch_move
+      delete :batch_destroy
     end
-
-    get :published, on: :collection
-
-    post :move_to
-    patch :batch_move, on: :collection
-    delete :batch_destroy, on: :collection
   end
 
-  resources :bq_packages do
+  resources :photos
+  resources :albums, concerns: :listable do
+    resources :photos
+  end
+
+  resources :bqs
+  resources :bq_packages, concerns: :listable do
     resources :bqs
-    post :publish
-    post :unpublish
-
-    collection do
-      get :search
-    end
-
-    get :published, on: :collection
-
-    post :move_to
-    patch :batch_move, on: :collection
-    delete :batch_destroy, on: :collection
   end
 
   resources :bq_types do
     resources :bq_packages
   end
-
-  resources :bqs
 
   root to: "bq_packages#index"
 end
