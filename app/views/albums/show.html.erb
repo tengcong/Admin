@@ -29,7 +29,9 @@
     <% @photos.each do |photo| %>
       <tr>
       <td>
-        <%= image_tag photo.try(:url) %>
+        <a href="<%= photo.try(:url) %>" class='fullsizable'>
+          <%= image_tag photo.try(:url) %>
+        </a>
       </td>
       <td>
         <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>

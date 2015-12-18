@@ -2,6 +2,8 @@
 @import "bootstrap";
 
 @import "select2";
+@import "jquery-fullsizable";
+@import "jquery-fullsizable-theme";
 
 a.published, a.unpublished{
   display: inline-block;
@@ -122,3 +124,4 @@ a.unpublished{
 .tt-hint {
   color: #999
 }
+

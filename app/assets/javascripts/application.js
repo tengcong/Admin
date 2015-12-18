@@ -1,10 +1,12 @@
 //= require jquery
-//= require jquery_ujs
 //= require jquery.turbolinks
-//= require turbolinks
+//= require jquery_ujs
 //= require select2
 //= require sortable
 //= require typeahead
+//= require jquery-fullsizable
+
+//= require turbolinks
 //= require_tree .
 
 $(function(){
@@ -129,4 +131,6 @@ $(function(){
   $("#bq_package_tags, #album_tags").select2({
     tags: true
   })
+
+  $('a.fullsizable').fullsizable();
 })
