@@ -4,8 +4,24 @@ class AlbumsController < ApplicationController
   include Publishable
   include BasicControl
 
+  ######### API #########
+  def tags
+    render json: { data: Album.published.tag_list }
+  end
+
+  def hot
+    @albums = Album.published.ordered.tagged_with('热门').limit(30)
+    render 'albums.json.jbuilder'
+  end
+
+  def tagged_with
+    @albums = Album.published.ordered.tagged_with(params[:tag])
+    render 'albums.json.jbuilder'
+  end
+  ######### API #########
+
   def index
-    @albums = Album.order(position: :asc).page params[:page]
+    @albums = Album.ordered.page params[:page]
 
     if tag = params[:tag]
       @albums = @albums.tagged_with tag

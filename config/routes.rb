@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   resources :photos
   resources :albums, concerns: :listable do
     resources :photos
+
+    collection do
+      get 'tags'
+      get 'hot'
+      get 'tagged_with/:tag' => 'albums#tagged_with'
+    end
   end
 
   resources :bqs

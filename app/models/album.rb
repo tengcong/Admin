@@ -13,6 +13,8 @@ class Album
 
   has_many :photos
 
+  scope :ordered, -> { order(position: :asc) }
+
   def self.search(q)
     self.any_of({ title: /.*#{q}.*/ })
   end
