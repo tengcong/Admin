@@ -32,5 +32,5 @@ Rails.application.routes.draw do
     resources :bq_packages
   end
 
-  root to: "album##index"
+  root to: "albums#index"
 end
