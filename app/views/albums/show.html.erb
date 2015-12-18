@@ -1,0 +1,45 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <%= link_to 'Edit', edit_album_path(@album) %> |
+  <%= link_to 'Back', :back %>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <table class='table beauty'>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>标签：</td>
+      <td>
+        <% @album.tags.each do |tag| %>
+          <%= link_to tag, albums_path(tag: tag) %>
+      <% end %>
+      </td>
+    </tr>
+
+    <% @photos.each do |photo| %>
+      <tr>
+      <td>
+        <%= image_tag photo.try(:url) %>
+      </td>
+      <td>
+        <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+      </td>
+    </tr>
+  <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @photos %>
+
+</div>
+

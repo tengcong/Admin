@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  resources :photos
+  resources :albums do
+    post :publish
+    post :unpublish
+    resources :photos
+  end
+
   resources :bq_packages do
     resources :bqs
     post :publish
