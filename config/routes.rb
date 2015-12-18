@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-  root to: "albums#index"
-
   concern :listable do
     post :publish
     post :unpublish
@@ -14,7 +11,7 @@ Rails.application.routes.draw do
       delete :batch_destroy
     end
   end
-  #
+
   resources :photos
   resources :albums, concerns: :listable do
     resources :photos
@@ -25,15 +22,15 @@ Rails.application.routes.draw do
       get 'tagged_with/:tag' => 'albums#tagged_with'
     end
   end
-  #
-  # resources :bqs
-  # resources :bq_packages, concerns: :listable do
-  #   resources :bqs
-  # end
-  #
-  # resources :bq_types do
-  #   resources :bq_packages
-  # end
-  #
-  # root to: "home#index"
+
+  resources :bqs
+  resources :bq_packages, concerns: :listable do
+    resources :bqs
+  end
+
+  resources :bq_types do
+    resources :bq_packages
+  end
+
+  root to: "album#index"
 end
