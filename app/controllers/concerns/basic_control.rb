@@ -15,7 +15,7 @@ module BasicControl
 
   def move_to
     key = "#{model.to_s.underscore}_id".to_sym
-    render json: {data: model.find(params[key])}
+    render json: {data: model.find(params[key]).move_to!(params[:to])}
   end
 
 end

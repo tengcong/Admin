@@ -6,6 +6,10 @@ class AlbumsController < ApplicationController
 
   def index
     @albums = Album.order(position: :asc).page params[:page]
+
+    if tag = params[:tag]
+      @albums = @albums.tagged_with tag
+    end
   end
 
   def show
