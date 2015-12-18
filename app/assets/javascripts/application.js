@@ -67,40 +67,43 @@ $(function(){
 
   var el = document.getElementById('items');
 
-  var sortable = Sortable.create(el, {
+  if(el){
 
-    dragable: ".item",
-    ghostClass: 'sortable-ghost',
-    chosenClass: 'sortable-chosen',
-    dataIdAttr: 'data-position',
-    handle: '.my-handle',
+    var sortable = Sortable.create(el, {
 
-    onEnd: function(evt){
+      dragable: ".item",
+      ghostClass: 'sortable-ghost',
+      chosenClass: 'sortable-chosen',
+      dataIdAttr: 'data-position',
+      handle: '.my-handle',
 
-      var collection = $(el).data('collection');
+      onEnd: function(evt){
 
-      var $item = $(evt.item);
-      var from, to;
-      var id = $item.data('id');
-      if(evt.oldIndex < evt.newIndex){
-        from = $item.data('position')
-        to = $item.prev().data('position')
-      }else{
-        from = $item.data('position')
-        to = $item.next().data('position')
-      }
+        var collection = $(el).data('collection');
 
-      $.post('/' + collection + '/' + id + '/move_to', { to: to }, function(data){
-        if(data.data){
-          console.log('done');
+        var $item = $(evt.item);
+        var from, to;
+        var id = $item.data('id');
+        if(evt.oldIndex < evt.newIndex){
+          from = $item.data('position')
+          to = $item.prev().data('position')
         }else{
-          alert('卧槽出错了');
+          from = $item.data('position')
+          to = $item.next().data('position')
         }
-      })
-    }
-  });
 
-  $("#bq_package_tags").select2({
+        $.post('/' + collection + '/' + id + '/move_to', { to: to }, function(data){
+          if(data.data){
+            console.log('done');
+          }else{
+            alert('卧槽出错了');
+          }
+        })
+      }
+    });
+  }
+
+  $("#bq_package_tags, #album_tags").select2({
     tags: true
   })
 })
