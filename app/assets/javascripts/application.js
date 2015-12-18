@@ -12,7 +12,9 @@ $(function(){
     e.preventDefault();
 
     if(confirm('确定移到顶部？')){
+
       var ids = $('#items input[type=checkbox]:checked');
+      var collection = $('#items').data('collection');
 
       var arr = [];
       ids.map(function(i, e){
@@ -20,7 +22,7 @@ $(function(){
       });
 
       $.ajax({
-        url: 'bq_packages/batch_move',
+        url: '/' + collection + '/batch_move',
         method: 'patch',
         data: { ids: arr, direction: $(this).data('direction') },
         success: function(data){
@@ -38,6 +40,8 @@ $(function(){
   $("#batch_destroy").click(function(e){
     e.preventDefault();
 
+    var collection = $('#items').data('collection');
+
     if(confirm('确定删除？')){
       var ids = $('#items input[type=checkbox]:checked');
 
@@ -47,7 +51,7 @@ $(function(){
       });
 
       $.ajax({
-        url: 'bq_packages/batch_destroy',
+        url: '/' + collection + '/batch_destroy',
         method: 'delete',
         data: { ids: arr },
         success: function(data){
@@ -59,10 +63,6 @@ $(function(){
         }
       });
     }
-  })
-
-  $("#bq_package_tags").select2({
-    tags: true
   })
 
   var el = document.getElementById('items');
@@ -77,6 +77,8 @@ $(function(){
 
     onEnd: function(evt){
 
+      var collection = $(el).data('collection');
+
       var $item = $(evt.item);
       var from, to;
       var id = $item.data('id');
@@ -88,7 +90,7 @@ $(function(){
         to = $item.next().data('position')
       }
 
-      $.post('/bq_packages/' + id + '/move_to', { to: to }, function(data){
+      $.post('/' + collection + '/' + id + '/move_to', { to: to }, function(data){
         if(data.data){
           console.log('done');
         }else{
@@ -96,6 +98,10 @@ $(function(){
         }
       })
     }
-
   });
+
+  $("#bq_package_tags").select2({
+    tags: true
+  })
+
 })

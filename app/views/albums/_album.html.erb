@@ -1,0 +1,66 @@
+<div class="buttons">
+  <%= link_to '新建套图', new_album_path, class: 'btn btn-default' %>
+  <%= link_to '全部删除', "#", class: 'btn btn-danger', id: 'batch_destroy' %>
+  <%= link_to '批量置顶', "#", class: 'btn btn-success batch-move', data: { direction: 'top' } %>
+  <%= link_to '批量置底', "#", class: 'btn btn-warning batch-move', data: { direction: 'bottom' } %>
+</div>
+
+<ul id='items' data-collection="albums">
+  <% albums.each do |album| %>
+
+    <li class='item clearfix' data-position="<%= album.position %>" data-id="<%= album.id %>">
+
+    <div class="select pull-left">
+      <input type="checkbox" name='package' id='p_<%= album.id %>' value='<%= album.id %>'>
+    </div>
+
+      <div class="name pull-left">
+        <label for="p_<%= album.id %>">
+          <%= album.title %>
+        </label>
+      </div>
+
+      <div class="tags pull-left">
+        标签：
+        <div>
+          <% album.tags.each do |tag| %>
+            <%= link_to tag, albums_path(tag: tag) %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="thumbnail pull-left">
+        <%= link_to album do %>
+          <%= image_tag album.photos.first.try(:url), width: 100 %>
+        <% end %>
+      </div>
+
+      <div class="controls pull-left">
+
+        <div class="div">
+          <% if album.published %>
+            <%= link_to '下架', album_unpublish_path(album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'published' %>
+          <% else %>
+              <%= link_to '发布', album_publish_path(album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'unpublished' %>
+          <% end %>
+        </div>
+
+        <div>
+          <%= link_to '编辑', edit_album_path(album) %>
+        </div>
+
+        <div>
+          <%= link_to '删除', album, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+        </div>
+      </div>
+
+      <div class="handle pull-right">
+        <span class="my-handle">::</span>
+      </div>
+
+    </li>
+
+  <% end %>
+</ul>
+
+<%= paginate albums %>

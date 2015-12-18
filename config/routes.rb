@@ -2,9 +2,15 @@ Rails.application.routes.draw do
 
   resources :photos
   resources :albums do
+    resources :photos
     post :publish
     post :unpublish
-    resources :photos
+
+    get :published, on: :collection
+
+    post :move_to
+    patch :batch_move, on: :collection
+    delete :batch_destroy, on: :collection
   end
 
   resources :bq_packages do
@@ -15,8 +21,8 @@ Rails.application.routes.draw do
     get :published, on: :collection
 
     post :move_to
-    delete :batch_destroy, on: :collection
     patch :batch_move, on: :collection
+    delete :batch_destroy, on: :collection
   end
 
   resources :bq_types do

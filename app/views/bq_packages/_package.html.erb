@@ -5,7 +5,7 @@
   <%= link_to '批量置底', "#", class: 'btn btn-warning batch-move', data: { direction: 'bottom' } %>
 </div>
 
-<ul id='items'>
+<ul id='items' data-collection="bq_packages">
   <% bq_packages.each do |bq_package| %>
 
     <li class='item clearfix' data-position="<%= bq_package.position %>" data-id="<%= bq_package.id %>">
