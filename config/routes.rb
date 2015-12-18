@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   concern :listable do
     post :publish
     post :unpublish
@@ -27,5 +26,5 @@ Rails.application.routes.draw do
     resources :bq_packages
   end
 
-  root to: "bq_packages#index"
+  root to: "home#index"
 end
