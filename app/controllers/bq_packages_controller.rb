@@ -1,9 +1,9 @@
 class BqPackagesController < ApplicationController
-  before_action :set_bq_package, only: [:show, :edit, :update, :destroy]
 
-  def published
-    @bq_packages = BqPackage.published.desc.page params[:page]
-  end
+  include Publishable
+  include BasicControl
+
+  before_action :set_bq_package, only: [:show, :edit, :update, :destroy]
 
   def index
     @bq_packages = BqPackage.order(position: :asc).page(params[:page])
@@ -57,35 +57,6 @@ class BqPackagesController < ApplicationController
       format.json { head :no_content }
       format.js { render js: "window.location.reload()" }
     end
-  end
-
-  def batch_move
-    BqPackage.any_in(id: params[:ids]).each do |package|
-      package.move_to! params[:direction].to_sym
-    end
-
-    render json: { success: true }
-  end
-
-  def batch_destroy
-    render json: {success: BqPackage.any_in(id: params[:ids]).destroy_all}
-  end
-
-  def publish
-    @bq_package = BqPackage.find(params[:bq_package_id])
-    @bq_package.publish!
-    render js: 'window.location.reload()'
-  end
-
-  def unpublish
-    @bq_package = BqPackage.find(params[:bq_package_id])
-    @bq_package.unpublish!
-    render js: 'window.location.reload()'
-  end
-
-  def move_to
-    @bq_package = BqPackage.find(params[:bq_package_id])
-    render json: {data: @bq_package.move_to!(params[:to])}
   end
 
   private

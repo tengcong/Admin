@@ -4,22 +4,13 @@ class Album
   include Mongoid::Timestamps
   include Mongoid::Orderable
 
+  include Mongoid::Publishable
+
   orderable
 
   field :title
   field :url
   field :thumbnail
-  field :published, type: Boolean, default: false
 
   has_many :photos
-
-  scope :published, -> { where(published: true) }
-
-  def publish!
-    update published: true
-  end
-
-  def unpublish!
-    update published: false
-  end
 end

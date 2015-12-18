@@ -103,5 +103,4 @@ $(function(){
   $("#bq_package_tags").select2({
     tags: true
   })
-
 })

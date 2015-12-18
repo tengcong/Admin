@@ -1,43 +1,24 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
 
-  def publish
-    @album = Album.find(params[:album_id])
-    @album.publish!
-    render js: 'window.location.reload()'
-  end
-
-  def unpublish
-    @album = Album.find(params[:album_id])
-    @album.unpublish!
-    render js: 'window.location.reload()'
-  end
-
-  def published
-    @albums = Album.published.desc.page params[:page]
-  end
+  include Publishable
+  include BasicControl
 
   def index
     @albums = Album.order(position: :asc).page params[:page]
   end
 
-  # GET /albums/1
-  # GET /albums/1.json
   def show
     @photos = @album.photos.page params[:page]
   end
 
-  # GET /albums/new
   def new
     @album = Album.new
   end
 
-  # GET /albums/1/edit
   def edit
   end
 
-  # POST /albums
-  # POST /albums.json
   def create
     @album = Album.new(album_params)
 
@@ -74,23 +55,6 @@ class AlbumsController < ApplicationController
       format.html { redirect_to albums_url, notice: 'Album was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def move_to
-    @album = Album.find(params[:album_id])
-    render json: {data: @album.move_to!(params[:to])}
-  end
-
-  def batch_move
-    Album.any_in(id: params[:ids]).each do |album|
-      album.move_to! params[:direction].to_sym
-    end
-
-    render json: { success: true }
-  end
-
-  def batch_destroy
-    render json: {success: Album.any_in(id: params[:ids]).destroy_all}
   end
 
   private

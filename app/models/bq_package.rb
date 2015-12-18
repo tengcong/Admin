@@ -4,6 +4,8 @@ class BqPackage
   include Mongoid::Timestamps
   include Mongoid::Orderable
 
+  include Mongoid::Publishable
+
   orderable
 
   belongs_to :bq_type
@@ -12,16 +14,5 @@ class BqPackage
   field :name
   field :url
 
-  field :published, type: Boolean, default: false
-
   scope :desc, -> { order(updated_at: :desc) }
-  scope :published, -> { where(published: true) }
-
-  def publish!
-    update published: true
-  end
-
-  def unpublish!
-    update published: false
-  end
 end
