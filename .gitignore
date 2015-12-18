@@ -13,3 +13,4 @@
 /tmp
 *.swo
 *.swp
+/public/assets/*
