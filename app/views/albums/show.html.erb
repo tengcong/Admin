@@ -7,7 +7,6 @@
   </h1>
 
   <div class="buttons">
-
     <%= link_to 'Back', albums_path, class: 'btn btn-default' %>
     <%= link_to 'Edit', edit_album_path(@album), class: 'btn btn-primary' %>
 
@@ -17,7 +16,6 @@
         <%= link_to '发布', album_publish_path(@album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-success' %>
     <% end %>
   </div>
-
 
   <table class='table beauty'>
     <thead>
@@ -31,7 +29,7 @@
       <td>标签：</td>
       <td>
         <% @album.tags.each do |tag| %>
-          <%= link_to tag, albums_path(tag: tag) %>
+          <%= link_to tag, albums_path(tag: tag), class: 'label label-info' %>
       <% end %>
       </td>
     </tr>
@@ -44,7 +42,7 @@
         </a>
       </td>
       <td>
-        <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+        <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
       </td>
     </tr>
   <% end %>
