@@ -6,7 +6,7 @@ class AlbumsController < ApplicationController
 
   ######### API #########
   def tags
-    render json: { data: Album.published.tag_list }
+    render json: Album.published.tag_list
   end
 
   def tagged_with
