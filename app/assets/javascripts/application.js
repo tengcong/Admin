@@ -31,7 +31,6 @@ $(function(){
     $('#searchBar .typeahead').typeahead(null, {
       name: 'search-result',
       display: function(data){
-        console.log(123);
         value = data['name'] || data['title']
         return value;
       },
