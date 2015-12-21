@@ -1,13 +1,23 @@
-<div class="container">
+<div class="container" id="album" data-collection="albums">
+
   <p id="notice"><%= notice %></p>
 
-  <%= link_to 'Edit', edit_album_path(@album) %> |
-  <%= link_to 'Back', :back %>
+  <h1>
+    <%= @album.title %>
+  </h1>
 
-  <br>
-  <br>
-  <br>
-  <br>
+  <div class="buttons">
+
+    <%= link_to 'Back', albums_path, class: 'btn btn-default' %>
+    <%= link_to 'Edit', edit_album_path(@album), class: 'btn btn-primary' %>
+
+    <% if @album.published %>
+      <%= link_to '下架', album_unpublish_path(@album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
+    <% else %>
+        <%= link_to '发布', album_publish_path(@album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-success' %>
+    <% end %>
+  </div>
+
 
   <table class='table beauty'>
     <thead>

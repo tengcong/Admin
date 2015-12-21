@@ -22,8 +22,6 @@ $(function(){
     var searchResult = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-
-      //prefetch: '../data/films/post_1960.json',
       remote: {
         url: '/' + collection + '/search?q=%QUERY',
         wildcard: '%QUERY'
@@ -33,6 +31,7 @@ $(function(){
     $('#searchBar .typeahead').typeahead(null, {
       name: 'search-result',
       display: function(data){
+        console.log(123);
         value = data['name'] || data['title']
         return value;
       },
