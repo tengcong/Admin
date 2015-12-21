@@ -10,7 +10,7 @@ class AlbumsController < ApplicationController
   end
 
   def tagged_with
-    @albums = Album.published.ordered.tagged_with(params[:tag])
+    @albums = Album.published.ordered.tagged_with(params[:tag]).page params[:page]
     render 'albums.json.jbuilder'
   end
   ######### API #########
