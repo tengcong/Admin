@@ -6,6 +6,7 @@
 //= require typeahead
 //= require jquery-fullsizable
 //= require jquery.lazyload
+//= require jquery.tagcloud
 
 //= require turbolinks
 //= require nprogress
@@ -13,6 +14,15 @@
 //= require_tree .
 
 $(function(){
+
+  $.fn.tagcloud.defaults = {
+    size: {start: 14, end: 50, unit: 'px'},
+    color: {start: '#1F45FF', end: '#F4FF1F'}
+  };
+
+  $(function () {
+    $('#tagCloud a').tagcloud();
+  });
 
   NProgress.configure({
     showSpinner: false,

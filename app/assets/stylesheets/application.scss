@@ -15,6 +15,10 @@ $nprogress-zindex: 10100;
 @import "nprogress";
 @import "nprogress-bootstrap";
 
+#tagCloud{
+  margin-top: 50px;
+}
+
 a.published, a.unpublished{
   display: inline-block;
   color: white;
