@@ -6,6 +6,7 @@ class Album
   include Mongoid::Publishable
 
   orderable
+  is_impressionable
 
   field :title
   field :url

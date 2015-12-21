@@ -25,27 +25,42 @@
     </thead>
 
     <tbody>
-    <tr>
-      <td>标签：</td>
-      <td>
-        <% @album.tags.each do |tag| %>
-          <%= link_to tag, albums_path(tag: tag), class: 'label label-info' %>
-      <% end %>
-      </td>
-    </tr>
 
-    <% @photos.each do |photo| %>
       <tr>
-      <td>
-        <a href="<%= photo.try(:url) %>" class='fullsizable'>
-          <img data-original="<%= photo.try(:url) %>" class='lazy'>
-        </a>
-      </td>
-      <td>
-        <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
-      </td>
-    </tr>
-  <% end %>
+        <td>IP：</td>
+        <td>
+          <%= @album.impressionist_count(filter: :ip_address) %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>PV：</td>
+        <td>
+          <%= @album.impressionist_count %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>标签：</td>
+        <td>
+          <% @album.tags.each do |tag| %>
+            <%= link_to tag, albums_path(tag: tag), class: 'label label-info' %>
+        <% end %>
+        </td>
+      </tr>
+
+      <% @photos.each do |photo| %>
+        <tr>
+          <td>
+            <a href="<%= photo.try(:url) %>" class='fullsizable'>
+              <img data-original="<%= photo.try(:url) %>" class='lazy'>
+            </a>
+          </td>
+          <td>
+            <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 

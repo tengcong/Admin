@@ -25,6 +25,10 @@ class AlbumsController < ApplicationController
 
   def show
     @photos = @album.photos.page params[:page]
+
+    if request.format == 'application/json'
+      impressionist(@album, "viewed")
+    end
   end
 
   def new

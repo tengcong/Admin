@@ -11,6 +11,8 @@ gem 'mongoid'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 
+gem 'impressionist'
+
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
