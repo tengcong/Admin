@@ -5,6 +5,16 @@
 @import "jquery-fullsizable";
 @import "jquery-fullsizable-theme";
 
+$nprogress-color: #FF271F;
+$nprogress-height: 30px;
+$nprogress-zindex: 10100;
+#nprogress .bar {
+  opacity: 0.6;
+}
+
+@import "nprogress";
+@import "nprogress-bootstrap";
+
 a.published, a.unpublished{
   display: inline-block;
   color: white;

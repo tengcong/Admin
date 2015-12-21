@@ -8,9 +8,18 @@
 //= require jquery.lazyload
 
 //= require turbolinks
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .
 
 $(function(){
+
+  NProgress.configure({
+    showSpinner: false,
+    ease: 'ease',
+    speed: 500
+  });
+
   $("img.lazy").lazyload({
     effect : "fadeIn"
   });
@@ -38,7 +47,8 @@ $(function(){
     });
 
     $('#searchBar .typeahead').bind('typeahead:select', function(ev, suggestion) {
-      window.location.href = '/' + collection + '/' + suggestion['_id']['$oid'];
+
+      Turbolinks.visit('/' + collection + '/' + suggestion['_id']['$oid'], { cacheRequest: false })
     });
 
     $(".batch-move").click(function(e){
@@ -59,7 +69,12 @@ $(function(){
           data: { ids: arr, direction: $(this).data('direction') },
           success: function(data){
             if(data.success){
-              window.location.reload();
+
+              Turbolinks.visit(window.location.href, { cacheRequest: false })
+
+
+
+
             }else{
               console.log(data);
             }
@@ -86,7 +101,7 @@ $(function(){
           data: { ids: arr },
           success: function(data){
             if(data.success){
-              window.location.reload();
+              Turbolinks.visit(window.location.href, { cacheRequest: false })
             }else{
               console.log(data);
             }

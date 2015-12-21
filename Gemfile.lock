@@ -47,6 +47,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -139,6 +142,7 @@ GEM
     net-ssh (3.0.1)
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
+    nprogress-rails (0.1.6.7)
     origin (2.1.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -227,6 +231,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
+  bootstrap-kaminari-views
   bootstrap-sass (~> 3.3.5)
   bullet
   byebug
@@ -246,6 +251,7 @@ DEPENDENCIES
   mongoid-simple-tags
   mongoid_orderable
   nokogiri
+  nprogress-rails
   pry-rails
   puma
   quiet_assets
