@@ -11,7 +11,9 @@
 //= require_tree .
 
 $(function(){
-  $("img.lazy").lazyload();
+  $("img.lazy").lazyload({
+    effect : "fadeIn"
+  });
 
   if($("#items").length > 0){
 
