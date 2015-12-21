@@ -35,12 +35,11 @@
 
       <div class="thumbnail pull-left">
         <%= link_to album do %>
-          <%= image_tag album.photos.first.try(:url), width: 100 %>
+          <img style='width: 100px;' data-original="<%= album.photos.first.try(:url) %>" class='lazy'>
         <% end %>
       </div>
 
       <div class="controls pull-left">
-
         <div class="div">
           <% if album.published %>
             <%= link_to '下架', album_unpublish_path(album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'published' %>

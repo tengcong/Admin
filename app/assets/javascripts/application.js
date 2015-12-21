@@ -5,11 +5,13 @@
 //= require sortable
 //= require typeahead
 //= require jquery-fullsizable
+//= require jquery.lazyload
 
 //= require turbolinks
 //= require_tree .
 
 $(function(){
+  $("img.lazy").lazyload();
 
   if($("#items").length > 0){
 

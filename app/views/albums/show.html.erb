@@ -30,7 +30,7 @@
       <tr>
       <td>
         <a href="<%= photo.try(:url) %>" class='fullsizable'>
-          <%= image_tag photo.try(:url) %>
+          <img data-original="<%= photo.try(:url) %>" class='lazy'>
         </a>
       </td>
       <td>
