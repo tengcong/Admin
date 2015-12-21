@@ -15,6 +15,9 @@
     <% else %>
         <%= link_to '发布', album_publish_path(@album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-success' %>
     <% end %>
+
+    <%= link_to '删除', @album, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
+
   </div>
 
   <table class='table beauty'>
