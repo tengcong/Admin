@@ -18,10 +18,11 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :tags %><br />
+      <%= f.label :tags %>
       <%= f.select :tags, BqPackage.tag_list, {include_hidden: false}, multiple: true, class: 'form-control' %>
     </div>
 
     <%= f.submit :save, class: 'btn btn-default' %>
   </div>
 <% end %>
+

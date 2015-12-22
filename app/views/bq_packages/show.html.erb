@@ -4,41 +4,52 @@
   <%= link_to 'Edit', edit_bq_package_path(@bq_package) %> |
   <%= link_to 'Back', :back %>
 
-  <br>
-  <br>
-  <br>
-  <br>
+  <hr>
 
+  <div class="tags">
+    标签：
 
-  <table class='table'>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+    <% @bq_package.tags.each do |tag| %>
+      <%= link_to tag, bq_packages_path(tag: tag), class: 'label label-info' %>
+    <% end %>
+  </div>
 
-    <tbody>
-    <tr>
-      <td>标签：</td>
-      <td>
-        <% @bq_package.tags.each do |tag| %>
-          <%= link_to tag, bq_packages_path(tag: tag) %>
+  <div class="upload-area" data-id='<%= @bq_package.id %>'>
+
+    <% if @bqs.count == 0 %>
+      <div class="icon fa fa-cloud-upload"></div>
+    <% end %>
+
+    <ul class='list'>
+      <% if @bqs.count > 0 %>
+        <% @bqs.each do |bq| %>
+          <li class="image clearfix">
+            <div class="pull-left">
+              <img src="<%= bq.image_url %>">
+            </div>
+            <div class="pull-right">
+              <%= link_to '删除', bq, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+            </div>
+          </li>
+        <% end %>
       <% end %>
-      </td>
-    </tr>
+    </ul>
 
-    <% @bqs.each do |bq| %>
-      <tr>
-      <td>
-        <%= image_tag bq.try(:origin_url) %>
-      </td>
-      <td>
-        <%= link_to '删除', bq, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-      </td>
-    </tr>
-  <% end %>
-    </tbody>
-  </table>
+    <div class="progress hidden">
+      <div class="progress-bar progress-bar-success progress-bar-striped active" style='width: 0%'></div>
+    </div>
+  </div>
+
+  <script type="text/x-tmpl" id="tmplImg">
+    <li class="image clearfix">
+      <div class="pull-left">
+        <img src="{%= o.image.url %}">
+      </div>
+      <div class="pull-right">
+        <a data-confirm="Are you sure?" data-remote="true" rel="nofollow" data-method="delete" href="/bqs/{%=o['_id']['$oid']%}">删除</a>
+      </div>
+    </li>
+  </script>
 
   <%= paginate @bqs %>
 

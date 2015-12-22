@@ -15,6 +15,8 @@ class BqPackage
 
   scope :ordered, -> { order(position: :asc) }
 
+  accepts_nested_attributes_for :bqs
+
   def self.search(q)
     self.any_of({ name: /.*#{q}.*/ })
   end

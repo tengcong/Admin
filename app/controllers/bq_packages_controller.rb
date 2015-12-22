@@ -5,6 +5,17 @@ class BqPackagesController < ApplicationController
 
   before_action :set_bq_package, only: [:show, :edit, :update, :destroy]
 
+  def batch_upload
+    package = BqPackage.find(params[:bq_package_id])
+
+    result = []
+    params[:files].each do |image|
+      result << package.bqs.create(image: image)
+    end
+
+    render json: result
+  end
+
   def index
     @bq_packages = BqPackage.order(position: :asc).page(params[:page])
 

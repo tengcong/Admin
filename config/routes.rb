@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   resources :bqs
   resources :bq_packages, concerns: :listable do
+    post 'batch_upload'
+
     resources :bqs
   end
 

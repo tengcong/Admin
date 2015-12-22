@@ -8,12 +8,82 @@
 //= require jquery.lazyload
 //= require jquery.tagcloud
 
+
+//= require jquery.ui.widget
+//= require jquery.iframe-transport
+//= require jquery.fileupload
+//= require tmpl
+
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
 //= require_tree .
 
 $(function(){
+
+  if($('.upload-area').length > 0){
+
+    var resource_id = $('.upload-area').data('id');
+
+    $('.upload-area').fileupload({
+      dataType: 'json',
+      url: '/bq_packages/' + resource_id + '/batch_upload',
+      dropZone: $('.upload-area'),
+      singleFileUploads: false,
+
+      add: function (e, data) {
+        $(this).find('.icon').addClass('hidden');
+        $(this).find('.progress').removeClass('hidden');
+
+        data.submit();
+      },
+
+      progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('.progress .progress-bar').css(
+            'width',
+            progress + '%'
+        );
+      },
+
+      done: function(e, data){
+        var $this = $(this);
+        $this.find('.progress').addClass('hidden');
+        console.log(data.result);
+        $.each(data.result, function(index, image) {
+          $this.find('.list').prepend(tmpl("tmplImg", image));
+        });
+      }
+    });
+
+    $(document).bind('dragover', function (e) {
+      var dropZone = $('.upload-area'),
+      timeout = window.dropZoneTimeout;
+      if (!timeout) {
+        dropZone.addClass('in');
+      } else {
+        clearTimeout(timeout);
+      }
+      var found = false,
+      node = e.target;
+      do {
+        if (node === dropZone[0]) {
+          found = true;
+          break;
+        }
+        node = node.parentNode;
+      } while (node != null);
+      if (found) {
+        dropZone.addClass('hover');
+      } else {
+        dropZone.removeClass('hover');
+      }
+      window.dropZoneTimeout = setTimeout(function () {
+        window.dropZoneTimeout = null;
+        dropZone.removeClass('in hover');
+      }, 100);
+    });
+  }
 
   $.fn.tagcloud.defaults = {
     size: {start: 14, end: 50, unit: 'px'},
