@@ -1,6 +1,6 @@
 json.page do
   json.total_pages @albums.total_pages
-  json.current_page 1 || params[:page]
+  json.current_page params[:page] || 1
 end
 
 json.data @albums do |album|
