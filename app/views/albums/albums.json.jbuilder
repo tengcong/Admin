@@ -1,4 +1,9 @@
-json.array!(@albums) do |album|
+json.page do
+  json.total_pages @albums.total_pages
+  json.current_page 1 || params[:page]
+end
+
+json.data @albums do |album|
   json.id album.id.to_s
   json.thumbnail album.thumbnail
   json.tags album.tags

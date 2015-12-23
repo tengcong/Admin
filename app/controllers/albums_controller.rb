@@ -13,7 +13,7 @@ class AlbumsController < ApplicationController
   end
 
   def tagged_with
-    @albums = Album.published.ordered.tagged_with(params[:tag]).page params[:page]
+    @albums = Album.published.ordered.tagged_with(params[:tag]).page(params[:page])
     render 'albums.json.jbuilder'
   end
   ######### API #########
@@ -71,13 +71,7 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1.json
   def destroy
     @album.destroy
-
     redirect_to albums_path, turbolinks: true
-
-    # respond_to do |format|
-    #   format.html { redirect_to albums_url, notice: 'Album was successfully destroyed.', turbolinks: true }
-    #   format.json { head :no_content }
-    # end
   end
 
   private
