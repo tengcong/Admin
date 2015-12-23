@@ -8,7 +8,7 @@ class AlbumsController < ApplicationController
   def tags
     respond_to do |format|
       format.html
-      format.json { render json: Album.published.tag_list }
+      format.json { render json: {data: Album.published.tag_list } }
     end
   end
 
