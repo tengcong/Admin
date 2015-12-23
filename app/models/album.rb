@@ -19,4 +19,8 @@ class Album
   def self.search(q)
     self.any_of({ title: /.*#{q}.*/ })
   end
+
+  def add_image image_file
+    self.photos.create(image: image_file)
+  end
 end

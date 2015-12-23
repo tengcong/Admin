@@ -4,15 +4,16 @@
 //= require select2
 //= require sortable
 //= require typeahead
-//= require jquery-fullsizable
 //= require jquery.lazyload
 //= require jquery.tagcloud
-
 
 //= require jquery.ui.widget
 //= require jquery.iframe-transport
 //= require jquery.fileupload
 //= require tmpl
+
+//= require jquery.throttle-debounce
+//= require jquery.fluidbox
 
 //= require turbolinks
 //= require nprogress
@@ -21,13 +22,22 @@
 
 $(function(){
 
+  function setupImageEffect(){
+    $("img.lazy").lazyload({
+      effect : "fadeIn"
+    });
+
+    $('a.fullsizable').fluidbox();
+  }
+
   if($('.upload-area').length > 0){
 
     var resource_id = $('.upload-area').data('id');
+    var collection = $('.upload-area').data('collection');
 
     $('.upload-area').fileupload({
       dataType: 'json',
-      url: '/bq_packages/' + resource_id + '/batch_upload',
+      url: '/' + collection + '/' + resource_id + '/batch_upload',
       dropZone: $('.upload-area'),
       singleFileUploads: false,
 
@@ -53,6 +63,8 @@ $(function(){
         $.each(data.result, function(index, image) {
           $this.find('.list').prepend(tmpl("tmplImg", image));
         });
+
+        setupImageEffect();
       }
     });
 
@@ -98,10 +110,6 @@ $(function(){
     showSpinner: false,
     ease: 'ease',
     speed: 500
-  });
-
-  $("img.lazy").lazyload({
-    effect : "fadeIn"
   });
 
   if($("#items").length > 0){
@@ -151,9 +159,6 @@ $(function(){
             if(data.success){
 
               Turbolinks.visit(window.location.href, { cacheRequest: false })
-
-
-
 
             }else{
               console.log(data);
@@ -228,5 +233,5 @@ $(function(){
     tags: true
   })
 
-  $('a.fullsizable').fullsizable();
+  setupImageEffect();
 })

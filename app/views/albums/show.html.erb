@@ -16,57 +16,62 @@
         <%= link_to '发布', album_publish_path(@album), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-success' %>
     <% end %>
 
-    <%= link_to '删除', @album, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
-
+    <%= link_to '删除', @album, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   </div>
 
-  <table class='table beauty'>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
 
-    <tbody>
+  <div class="tags">
+    标签：
+    <% @album.tags.each do |tag| %>
+      <%= link_to tag, albums_path(tag: tag), class: 'label label-info' %>
+    <% end %>
+  </div>
 
-      <tr>
-        <td>IP：</td>
-        <td>
-          <%= @album.impressionist_count(filter: :ip_address) %>
-        </td>
-      </tr>
+  <div class="impressions">
+    IP：<%= @album.impressionist_count(filter: :ip_address) %>
+    PV：<%= @album.impressionist_count %>
+  </div>
 
-      <tr>
-        <td>PV：</td>
-        <td>
-          <%= @album.impressionist_count %>
-        </td>
-      </tr>
+  <div class="upload-area" data-id='<%= @album.id %>' data-collection='albums'>
 
-      <tr>
-        <td>标签：</td>
-        <td>
-          <% @album.tags.each do |tag| %>
-            <%= link_to tag, albums_path(tag: tag), class: 'label label-info' %>
+    <% if @photos.count == 0 %>
+      <div class="icon fa fa-cloud-upload"></div>
+    <% end %>
+
+    <ul class='list'>
+      <% if @photos.count > 0 %>
+        <% @photos.each do |photo| %>
+          <li class="image clearfix">
+            <div class="pull-left">
+              <a href="<%= photo.try(:image_url) %>" class='fullsizable'>
+                <img data-original="<%= photo.try(:image_url) %>" class='lazy'>
+              </a>
+            </div>
+            <div class="pull-right">
+              <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+            </div>
+          </li>
         <% end %>
-        </td>
-      </tr>
-
-      <% @photos.each do |photo| %>
-        <tr>
-          <td>
-            <a href="<%= photo.try(:url) %>" class='fullsizable'>
-              <img data-original="<%= photo.try(:url) %>" class='lazy'>
-            </a>
-          </td>
-          <td>
-            <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
-          </td>
-        </tr>
       <% end %>
-    </tbody>
-  </table>
+    </ul>
+
+    <div class="progress hidden">
+      <div class="progress-bar progress-bar-success progress-bar-striped active" style='width: 0%'></div>
+    </div>
+  </div>
+
+  <script type="text/x-tmpl" id="tmplImg">
+    <li class="image clearfix">
+      <div class="pull-left">
+        <a href="{%= o.image.url %}" class='fullsizable'>
+          <img data-original="{%= o.image.url %}" class='lazy'>
+        </a>
+      </div>
+      <div class="pull-right">
+        <a data-confirm="Are you sure?" data-remote="true" rel="nofollow" data-method="delete" href="/photos/{%=o['_id']['$oid']%}">删除</a>
+      </div>
+    </li>
+  </script>
 
   <%= paginate @photos %>
-
 </div>

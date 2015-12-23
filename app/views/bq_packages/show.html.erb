@@ -1,20 +1,31 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <%= link_to 'Edit', edit_bq_package_path(@bq_package) %> |
-  <%= link_to 'Back', :back %>
+  <h1>
+    <%= @bq_package.name %>
+  </h1>
 
-  <hr>
+  <div class="buttons">
+    <%= link_to 'Back', bq_packages_path, class: 'btn btn-default' %>
+    <%= link_to 'Edit', edit_bq_package_path(@bq_package), class: 'btn btn-primary' %>
+
+    <% if @bq_package.published %>
+      <%= link_to '下架', bq_package_unpublish_path(@bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
+    <% else %>
+        <%= link_to '发布', bq_package_publish_path(@bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-success' %>
+    <% end %>
+
+    <%= link_to '删除', @bq_package, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
 
   <div class="tags">
     标签：
-
     <% @bq_package.tags.each do |tag| %>
       <%= link_to tag, bq_packages_path(tag: tag), class: 'label label-info' %>
     <% end %>
   </div>
 
-  <div class="upload-area" data-id='<%= @bq_package.id %>'>
+  <div class="upload-area" data-id='<%= @bq_package.id %>' data-collection='bq_packages'>
 
     <% if @bqs.count == 0 %>
       <div class="icon fa fa-cloud-upload"></div>
@@ -52,5 +63,4 @@
   </script>
 
   <%= paginate @bqs %>
-
 </div>

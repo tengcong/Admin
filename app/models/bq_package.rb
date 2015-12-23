@@ -20,4 +20,8 @@ class BqPackage
   def self.search(q)
     self.any_of({ name: /.*#{q}.*/ })
   end
+
+  def add_image image_file
+    self.bqs.create(image: image_file)
+  end
 end

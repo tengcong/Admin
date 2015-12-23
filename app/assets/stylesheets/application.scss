@@ -1,8 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "select2";
-@import "jquery-fullsizable";
-@import "jquery-fullsizable-theme";
+@import "jquery.fluidbox";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bourbon";
@@ -213,4 +212,8 @@ a.unpublished{
       width: 100px;
     }
   }
+}
+
+.buttons{
+  margin: 20px auto;
 }

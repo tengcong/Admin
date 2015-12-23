@@ -22,4 +22,16 @@ module BasicControl
     render json: model.search(params[:q])
   end
 
+  def batch_upload
+    key = "#{model.to_s.underscore}_id".to_sym
+    resource = model.find(params[key])
+
+    result = []
+    params[:files].each do |image_file|
+      result << resource.add_image(image_file)
+    end
+
+    render json: result
+  end
+
 end
