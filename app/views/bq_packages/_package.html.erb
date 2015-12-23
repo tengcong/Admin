@@ -28,7 +28,7 @@
         标签：
         <div>
           <% bq_package.tags.each do |tag| %>
-            <%= link_to tag, bq_packages_path(tag: tag) %>
+            <%= link_to tag, bq_packages_path(tag: tag), class: 'label label-info' %>
           <% end %>
         </div>
       </div>
@@ -40,22 +40,15 @@
       </div>
 
       <div class="controls pull-left">
+        <% if bq_package.published %>
+          <%= link_to '下架', bq_package_unpublish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-warning' %>
+        <% else %>
+            <%= link_to '发布', bq_package_publish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-success' %>
+        <% end %>
 
-        <div class="div">
-          <% if bq_package.published %>
-            <%= link_to '下架', bq_package_unpublish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'published' %>
-          <% else %>
-              <%= link_to '发布', bq_package_publish_path(bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'unpublished' %>
-          <% end %>
-        </div>
+        <%= link_to '编辑', edit_bq_package_path(bq_package), class: 'btn btn-info' %>
 
-        <div>
-          <%= link_to '编辑', edit_bq_package_path(bq_package) %>
-        </div>
-
-        <div>
-          <%= link_to '删除', bq_package, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-        </div>
+        <%= link_to '删除', bq_package, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
       </div>
 
       <div class="handle pull-right">
