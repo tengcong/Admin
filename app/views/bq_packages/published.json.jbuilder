@@ -3,7 +3,7 @@ json.page do
   if params[:page]
     json.current_page params[:page].to_i
   else
-    1
+    json.current_page 1
   end
 end
 json.data @collection do |bq_package|
