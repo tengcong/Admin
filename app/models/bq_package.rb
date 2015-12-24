@@ -6,6 +6,7 @@ class BqPackage
   include Mongoid::Publishable
 
   orderable
+  paginates_per 10
 
   belongs_to :bq_type
   has_many :bqs
