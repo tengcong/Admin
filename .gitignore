@@ -14,5 +14,5 @@
 *.swo
 *.swp
 /public/assets/*
-/public/uploads/*
+/public/uploads
 
