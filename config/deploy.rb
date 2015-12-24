@@ -24,7 +24,7 @@ set :puma_preload_app, true
 set :nginx_use_ssl, false
 
 set :linked_files, %w{config/mongoid.yml config/secrets.yml }
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle }
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads }
 
 namespace :deploy do
   after :finishing, 'deploy:cleanup'
