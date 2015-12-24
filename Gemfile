@@ -10,7 +10,6 @@ gem 'nprogress-rails'
 
 gem 'bourbon'
 
-
 gem 'mongoid'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
@@ -24,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'carrierwave-mongoid'
+gem 'carrierwave-upyun'
 
 gem 'nokogiri'
 
