@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post 'batch_upload'
 
     collection do
+      get 'tags'
       get :search
       get :published
       patch :batch_move
@@ -18,7 +19,6 @@ Rails.application.routes.draw do
     resources :photos
 
     collection do
-      get 'tags'
       get 'hot'
       get 'tagged_with/:tag' => 'albums#tagged_with'
     end

@@ -5,6 +5,13 @@ class BqPackagesController < ApplicationController
 
   before_action :set_bq_package, only: [:show, :edit, :update, :destroy]
 
+  def tags
+    respond_to do |format|
+      format.html
+      format.json { render json: {data: BqPackage.published.tag_list } }
+    end
+  end
+
   def index
     @bq_packages = BqPackage.order(position: :asc).page(params[:page])
 

@@ -1,0 +1,11 @@
+<%= render "shared/bq_header" %>
+
+<div class="container">
+
+  <div id="tagCloud">
+    <% BqPackage.all_tags.each do |tag_hash| %>
+      <%= link_to tag_hash[:name], bq_packages_path(tag: tag_hash[:name]), rel: tag_hash[:count] %>
+    <% end %>
+  </div>
+
+</div>

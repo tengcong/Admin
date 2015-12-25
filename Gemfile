@@ -13,6 +13,7 @@ gem 'bourbon'
 gem 'mongoid'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
+gem 'active_link_to'
 
 gem 'impressionist'
 

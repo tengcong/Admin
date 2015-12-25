@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <%= link_to "表情App", bq_packages_path, class: 'navbar-brand' %>
+
+      <ul class="nav navbar-nav">
+        <li>
+          <%= active_link_to '已发布', published_bq_packages_path, wrap_tag: :li %>
+        </li>
+        <li>
+          <%= active_link_to '标签', tags_bq_packages_path, wrap_tag: :li %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
