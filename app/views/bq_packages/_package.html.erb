@@ -1,8 +1,11 @@
 <div class="buttons">
   <%= link_to '新建表情包', new_bq_package_path, class: 'btn btn-default' %>
-  <%= link_to '全部删除', "#", class: 'btn btn-danger', id: 'batch_destroy' %>
+  <%= link_to '全部删除', "#", class: 'btn btn-danger batch-destroy' %>
   <%= link_to '批量置顶', "#", class: 'btn btn-success batch-move', data: { direction: 'top' } %>
   <%= link_to '批量置底', "#", class: 'btn btn-warning batch-move', data: { direction: 'bottom' } %>
+
+  <%= link_to '批量发布', "#", class: 'btn btn-success batch-publish' %>
+  <%= link_to '批量下架', "#", class: 'btn btn-warning batch-unpublish' %>
 </div>
 
 <ul id='items' data-collection="bq_packages">
@@ -43,14 +46,12 @@
         <% end %>
 
         <%= link_to '编辑', edit_bq_package_path(bq_package), class: 'btn btn-info' %>
-
         <%= link_to '删除', bq_package, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
       </div>
 
       <div class="handle pull-right">
         <span class="my-handle">::</span>
       </div>
-
     </li>
 
   <% end %>

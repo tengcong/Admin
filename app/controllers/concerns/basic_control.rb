@@ -2,8 +2,8 @@ module BasicControl
   extend ActiveSupport::Concern
 
   def batch_move
-    model.any_in(id: params[:ids]).each do |album|
-      album.move_to! params[:direction].to_sym
+    model.any_in(id: params[:ids]).each do |resource|
+      resource.move_to! params[:direction].to_sym
     end
 
     render json: { success: true }

@@ -11,6 +11,9 @@ Rails.application.routes.draw do
       get :published
       patch :batch_move
       delete :batch_destroy
+
+      patch :batch_publish
+      patch :batch_unpublish
     end
   end
 

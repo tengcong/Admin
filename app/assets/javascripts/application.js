@@ -143,6 +143,62 @@ $(function(){
 
     var collection = $('#items').data('collection');
 
+    $('.batch-publish').click(function(e){
+      e.preventDefault();
+
+      if(confirm('确定发布？')){
+        var ids = $('#items input[type=checkbox]:checked');
+
+        var arr = [];
+        ids.map(function(i, e){
+          arr.push($(e).val());
+        });
+
+        $.ajax({
+          url: '/' + collection + '/batch_publish',
+          method: 'patch',
+          data: { ids: arr },
+          success: function(data){
+            if(data.success){
+
+              Turbolinks.visit(window.location.href, { cacheRequest: false })
+
+            }else{
+              console.log(data);
+            }
+          }
+        });
+      }
+    });
+
+    $('.batch-unpublish').click(function(e){
+      e.preventDefault();
+
+      if(confirm('确定发布？')){
+        var ids = $('#items input[type=checkbox]:checked');
+
+        var arr = [];
+        ids.map(function(i, e){
+          arr.push($(e).val());
+        });
+
+        $.ajax({
+          url: '/' + collection + '/batch_unpublish',
+          method: 'patch',
+          data: { ids: arr },
+          success: function(data){
+            if(data.success){
+
+              Turbolinks.visit(window.location.href, { cacheRequest: false })
+
+            }else{
+              console.log(data);
+            }
+          }
+        });
+      }
+    });
+
     $(".batch-move").click(function(e){
       e.preventDefault();
 
@@ -169,11 +225,10 @@ $(function(){
             }
           }
         });
-
       }
     });
 
-    $("#batch_destroy").click(function(e){
+    $(".batch-destroy").click(function(e){
       e.preventDefault();
 
       if(confirm('确定删除？')){
