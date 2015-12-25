@@ -22,6 +22,33 @@
 
 $(function(){
 
+  if($("#searchBar").length > 0) {
+
+    var collection = $('#searchBar').data('collection');
+
+    var searchResult = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      remote: {
+        url: '/' + collection + '/search?q=%QUERY',
+        wildcard: '%QUERY'
+      }
+    });
+
+    $('#searchBar .typeahead').typeahead(null, {
+      name: 'search-result',
+      display: function(data){
+        value = data['name'] || data['title']
+        return value;
+      },
+      source: searchResult
+    });
+
+    $('#searchBar .typeahead').bind('typeahead:select', function(ev, suggestion) {
+      Turbolinks.visit('/' + collection + '/' + suggestion['_id']['$oid'], { cacheRequest: false })
+    });
+  }
+
   function setupImageEffect(){
     $("img.lazy").lazyload({
       effect : "fadeIn"
@@ -115,29 +142,6 @@ $(function(){
   if($("#items").length > 0){
 
     var collection = $('#items').data('collection');
-
-    var searchResult = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      remote: {
-        url: '/' + collection + '/search?q=%QUERY',
-        wildcard: '%QUERY'
-      }
-    });
-
-    $('#searchBar .typeahead').typeahead(null, {
-      name: 'search-result',
-      display: function(data){
-        value = data['name'] || data['title']
-        return value;
-      },
-      source: searchResult
-    });
-
-    $('#searchBar .typeahead').bind('typeahead:select', function(ev, suggestion) {
-
-      Turbolinks.visit('/' + collection + '/' + suggestion['_id']['$oid'], { cacheRequest: false })
-    });
 
     $(".batch-move").click(function(e){
       e.preventDefault();

@@ -1,8 +1,4 @@
 <div class="buttons">
-  <div id="searchBar">
-    <input class="typeahead form-control" type="text" placeholder="输入关键字...">
-  </div>
-
   <%= link_to '新建表情包', new_bq_package_path, class: 'btn btn-default' %>
   <%= link_to '全部删除', "#", class: 'btn btn-danger', id: 'batch_destroy' %>
   <%= link_to '批量置顶', "#", class: 'btn btn-success batch-move', data: { direction: 'top' } %>

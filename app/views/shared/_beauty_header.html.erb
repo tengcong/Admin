@@ -11,6 +11,12 @@
           <%= active_link_to '标签', tags_albums_path, wrap_tag: :li %>
         </li>
       </ul>
+
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group" id="searchBar" data-collection='albums'>
+          <input class="typeahead form-control" type="text" placeholder="输入关键字...">
+        </div>
+      </form>
     </div>
   </div>
 </nav>
