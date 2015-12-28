@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   end
 
   root to: "home#index"
-  resource :home do
+  resources :home do
     get 'app', on: :collection
   end
 end
