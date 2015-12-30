@@ -12,6 +12,11 @@ class BqPackagesController < ApplicationController
     end
   end
 
+  def tagged_with
+    @bq_packages = BqPackage.published.ordered.tagged_with(params[:tag]).page(params[:page])
+    render 'bq_packages.json.jbuilder'
+  end
+
   def index
     @bq_packages = BqPackage.order(position: :asc).page(params[:page])
 
