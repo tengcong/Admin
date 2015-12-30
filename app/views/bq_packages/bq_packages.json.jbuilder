@@ -9,6 +9,7 @@ end
 
 json.data @bq_packages do |bq_package|
   json.id bq_package.id.to_s
+  json.name bq_package.name
   json.tags bq_package.tags
-  json.url bq_package.bqs.first.try(:image_url)
+  json.thumbnail bq_package.bqs.first.image_url
 end
