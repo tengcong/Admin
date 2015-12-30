@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   resources :bqs
   resources :bq_packages, concerns: :listable do
     resources :bqs
+    collection do
+      get 'tagged_with/:tag' => 'bq_packages#tagged_with'
+    end
   end
 
   resources :bq_types do
