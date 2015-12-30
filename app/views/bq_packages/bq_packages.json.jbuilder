@@ -9,5 +9,5 @@ end
 
 json.data @bq_packages do |bq_package|
   json.id bq_package.id.to_s
-  json.url bq_package.image_url
+  json.url bq_package.bqs.first.try(:image_url)
 end
