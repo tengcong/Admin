@@ -139,6 +139,35 @@ $(function(){
     speed: 500
   });
 
+  $(".move-item").click(function(e){
+    e.preventDefault();
+
+    if(confirm('确定移到顶部？')){
+
+      var id = $(this).data('id');
+      var collection = $(this).data('collection');
+      var direction = $(this).data('direction')
+
+      console.log(id);
+
+      $.ajax({
+        url: '/' + collection + '/' + id + '/move_to',
+        method: 'post',
+        data: { to: direction },
+        success: function(data){
+          if(data.success){
+
+            Turbolinks.visit(window.location.href, { cacheRequest: false })
+
+          }else{
+            console.log(data);
+          }
+        }
+      });
+    }
+  });
+
+
   if($("#items").length > 0){
 
     var collection = $('#items').data('collection');

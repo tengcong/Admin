@@ -17,6 +17,10 @@
         <%= link_to '发布', bq_package_publish_path(@bq_package), method: :post, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-success' %>
     <% end %>
 
+    <%= link_to '置顶', "#", class: 'btn btn-success move-item', data: { direction: 'top', id: @bq_package.id.to_s, collection: 'bq_packages' } %>
+
+    <%= link_to '置底', "#", class: 'btn btn-warning move-item', data: { direction: 'bottom', id: @bq_package.id.to_s, collection: 'bq_packages' } %>
+
     <%= link_to '删除', @bq_package, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   </div>
 
