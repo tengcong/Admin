@@ -1,9 +1,0 @@
-<%= render "shared/beauty_header" %>
-
-<div class="container">
-  <div id="tagCloud">
-    <% Album.all_tags.each do |tag_hash| %>
-      <%= link_to tag_hash[:name], albums_path(tag: tag_hash[:name]), rel: tag_hash[:count] %>
-    <% end %>
-  </div>
-</div>

@@ -1,0 +1,28 @@
+<%= form_for [:admin, @bq_package] do |f| %>
+  <% if @bq_package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bq_package.errors.count, "error") %> prohibited this bq_package from being saved:</h2>
+
+      <ul>
+      <% @bq_package.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :tags %>
+      <%= f.select :tags, BqPackage.tag_list, {include_hidden: false}, multiple: true, class: 'form-control' %>
+    </div>
+
+    <%= f.submit :save, class: 'btn btn-default' %>
+  </div>
+<% end %>
+
