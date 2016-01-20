@@ -14,5 +14,3 @@ set :rbenv_ruby, '2.2.3'
 set :application, 'bq'
 
 set :enable_ssl, false
-
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
