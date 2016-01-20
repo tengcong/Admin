@@ -11,5 +11,7 @@ set :application, 'vr'
 
 set :enable_ssl, false
 
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+
 after 'deploy:publishing', 'puma:restart'
 
