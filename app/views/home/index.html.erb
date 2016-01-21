@@ -13,7 +13,7 @@
 
           <% type.sites.each do |site| %>
             <div class="site">
-              <%= link_to site.title, site.url %>
+              <%= link_to site.title, site.url, target: '_blank' %>
             </div>
           <% end %>
         </div>
