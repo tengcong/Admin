@@ -14,6 +14,12 @@
   <div class="actions">
 
     <div class="form-group">
+      <%= f.label :site_type_id %>
+
+      <%= f.grouped_collection_select :site_type_id, SiteCategory.all, :site_types, :name, :id, :name, {}, class: 'form-control', id: 'site_type_selector' %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control' %>
     </div>
@@ -26,11 +32,6 @@
       <%= f.text_field :icon_url, class: 'form-control' %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :site_type %>
-
-      <%= f.select :site_type, SiteType.mapping, {}, class: 'form-control' %>
-    </div>
     <%= f.submit :save, class: 'btn btn-default' %>
   </div>
 <% end %>

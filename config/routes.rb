@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
 
     # vr #
+    resources :site_categories
     resources :site_types
     resources :sites do
       post :move_to

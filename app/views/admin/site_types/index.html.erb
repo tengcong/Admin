@@ -13,6 +13,7 @@
 
       <tr>
         <td>名称</td>
+        <td>大类</td>
         <th colspan="3">操作</th>
       </tr>
     </thead>
@@ -21,6 +22,7 @@
       <% @admin_site_types.each do |admin_site_type| %>
         <tr>
           <td><%= admin_site_type.name %></td>
+          <td><%= admin_site_type.site_category.try :name %></td>
           <td><%= link_to 'Edit', edit_admin_site_type_path(admin_site_type) %></td>
           <td><%= link_to 'Destroy', [:admin, admin_site_type], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>

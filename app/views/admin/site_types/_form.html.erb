@@ -12,10 +12,15 @@
   <% end %>
 
   <div class="actions">
-
     <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :site_category_id %>
+
+      <%= f.select :site_category_id, SiteCategory.mapping, {}, class: 'form-control' %>
     </div>
 
     <%= f.submit :save, class: 'btn btn-default' %>

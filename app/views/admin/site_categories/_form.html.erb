@@ -1,0 +1,22 @@
+<%= form_for [:admin, @admin_site_category] do |f| %>
+  <% if @admin_site_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_site_category.errors.count, "error") %> prohibited this admin_site_category from being saved:</h2>
+
+      <ul>
+      <% @admin_site_category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <%= f.submit :save, class: 'btn btn-default' %>
+  </div>
+<% end %>

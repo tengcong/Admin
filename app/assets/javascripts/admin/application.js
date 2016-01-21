@@ -317,9 +317,10 @@ $(function(){
     });
   }
 
+  $('#site_type_selector').select2();
   $("#bq_package_tags, #album_tags").select2({
     tags: true
-  })
+  });
 
   setupImageEffect();
 })

@@ -69,6 +69,6 @@ class Admin::SiteTypesController < Admin::MainController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_site_type_params
-      params[:site_type].permit(:name)
+      params[:site_type].permit(:name, :site_category_id)
     end
 end

@@ -6,8 +6,4 @@ class SiteType
   belongs_to :site_category
 
   field :name
-
-  def self.mapping
-    self.all.map{|type| [type.name, type.id] }
-  end
 end
