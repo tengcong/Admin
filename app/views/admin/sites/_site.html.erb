@@ -1,0 +1,46 @@
+<div class="buttons">
+  <%= link_to '新建网站', new_admin_site_path, class: 'btn btn-default' %>
+  <%= link_to '全部删除', "#", class: 'btn btn-danger batch-destroy' %>
+  <%= link_to '批量置顶', "#", class: 'btn btn-success batch-move', data: { direction: 'top' } %>
+  <%= link_to '批量置底', "#", class: 'btn btn-warning batch-move', data: { direction: 'bottom' } %>
+</div>
+
+<ul id='items' data-collection="sites">
+  <% sites.each do |site| %>
+
+    <li class='item clearfix' data-position="<%= site.position %>" data-id="<%= site.id %>">
+
+    <div class="select pull-left">
+      <input type="checkbox" name='package' id='p_<%= site.id %>' value='<%= site.id %>'>
+    </div>
+
+      <div class="name pull-left">
+        <label for="p_<%= site.id %>">
+          <%= site.title %>
+        </label>
+      </div>
+
+      <div class="link pull-left">
+        <%= site.url %>
+      </div>
+
+      <div class="icon pull-left">
+        <%= site.icon_url %>
+      </div>
+
+      <div class="controls pull-left">
+        <%= link_to '编辑', edit_admin_site_path(site), class: 'btn btn-info' %>
+
+        <%= link_to '删除', [:admin, site], method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
+      </div>
+
+      <div class="handle pull-right">
+        <span class="my-handle">::</span>
+      </div>
+
+    </li>
+
+  <% end %>
+</ul>
+
+<%= paginate sites, theme: 'twitter-bootstrap-3' %>

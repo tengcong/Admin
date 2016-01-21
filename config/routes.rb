@@ -2,6 +2,17 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :admin do
+
+    # vr #
+    resources :sites do
+      post :move_to
+      collection do
+        patch :batch_move
+        delete :batch_destroy
+      end
+    end
+    # vr #
+
     concern :listable do
       post :publish
       post :unpublish
