@@ -2,8 +2,13 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :admin do
-
     # vr #
+    resources :articles do
+      collection do
+        get 'scrawler_page'
+        post 'crawl'
+      end
+    end
     resources :site_categories
     resources :site_types
     resources :sites do
