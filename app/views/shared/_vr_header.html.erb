@@ -3,5 +3,23 @@
     <div class="navbar-header">
       <%= link_to "VRTime", admin_sites_path, class: 'navbar-brand' %>
     </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">导航管理 <span class="caret"></span></a>
+
+          <ul class="dropdown-menu">
+            <%= active_link_to '网站管理', admin_sites_path, wrap_tag: :li %>
+            <%= active_link_to '网站类型', admin_site_types_path, wrap_tag: :li %>
+            <%= active_link_to '网站总类',   admin_site_categories_path, wrap_tag: :li %>
+          </ul>
+        </li>
+
+        <%= active_link_to 'Link', '#', wrap_tag: :li %>
+      </ul>
+    </div>
   </div>
 </nav>

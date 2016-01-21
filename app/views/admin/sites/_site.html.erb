@@ -10,9 +10,9 @@
 
     <li class='item clearfix' data-position="<%= site.position %>" data-id="<%= site.id %>">
 
-    <div class="select pull-left">
-      <input type="checkbox" name='package' id='p_<%= site.id %>' value='<%= site.id %>'>
-    </div>
+      <div class="select pull-left">
+        <input type="checkbox" name='package' id='p_<%= site.id %>' value='<%= site.id %>'>
+      </div>
 
       <div class="name pull-left">
         <label for="p_<%= site.id %>">
@@ -25,7 +25,7 @@
       </div>
 
       <div class="icon pull-left">
-        <%= site.icon_url %>
+        <%= image_tag site.icon_url %>
       </div>
 
       <div class="site-type-name pull-left">
