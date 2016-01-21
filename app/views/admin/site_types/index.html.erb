@@ -1,0 +1,30 @@
+<%= render "shared/vr_header" %>
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Site Types</h1>
+
+  <%= link_to 'New Site type', new_admin_site_type_path, class: 'btn btn-default' %>
+  <br>
+
+  <table class='table'>
+    <thead>
+
+      <tr>
+        <td>名称</td>
+        <th colspan="3">操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @admin_site_types.each do |admin_site_type| %>
+        <tr>
+          <td><%= admin_site_type.name %></td>
+          <td><%= link_to 'Edit', edit_admin_site_type_path(admin_site_type) %></td>
+          <td><%= link_to 'Destroy', [:admin, admin_site_type], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

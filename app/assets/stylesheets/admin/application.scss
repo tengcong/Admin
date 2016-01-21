@@ -214,3 +214,11 @@ a.unpublished{
 .buttons{
   margin: 20px auto;
 }
+
+.sites{
+  .item{
+    .link, .icon, .site-type-name{
+      margin-left: rem(20);
+    }
+  }
+}

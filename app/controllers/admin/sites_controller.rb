@@ -44,7 +44,7 @@ class Admin::SitesController < Admin::MainController
   def update
     respond_to do |format|
       if @admin_site.update(admin_site_params)
-        format.html { redirect_to @admin_site, notice: 'Site was successfully updated.' }
+        format.html { redirect_to admin_sites_path, notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_site }
       else
         format.html { render :edit }
@@ -72,6 +72,6 @@ class Admin::SitesController < Admin::MainController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_site_params
-      params[:site].permit(:title, :url, :icon_url)
+      params[:site].permit(:title, :url, :icon_url, :site_type)
     end
 end

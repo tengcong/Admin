@@ -5,7 +5,7 @@
   <%= link_to '批量置底', "#", class: 'btn btn-warning batch-move', data: { direction: 'bottom' } %>
 </div>
 
-<ul id='items' data-collection="sites">
+<ul id='items' data-collection="sites" class='sites'>
   <% sites.each do |site| %>
 
     <li class='item clearfix' data-position="<%= site.position %>" data-id="<%= site.id %>">
@@ -26,6 +26,10 @@
 
       <div class="icon pull-left">
         <%= site.icon_url %>
+      </div>
+
+      <div class="site-type-name pull-left">
+        <%= site.site_type.name %>
       </div>
 
       <div class="controls pull-left">
