@@ -6,8 +6,11 @@ class Site
   orderable
   scope :ordered, -> { order(position: :asc) }
 
+  has_many :crawling_endpoints, dependent: :destroy
+  belongs_to :site_type
+
   field :title
   field :url
   field :icon_url
-  belongs_to :site_type
+  field :crawlable, type: Boolean, default: false
 end
