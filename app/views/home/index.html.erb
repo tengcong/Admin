@@ -3,7 +3,21 @@
 <% end %>
 
 <div class="container">
-  <h1>
-    首页
-  </h1>
+  <% @site_categories.each do |category| %>
+    <div class="category">
+      <%= category.name %>
+
+      <% category.site_types.each do |type| %>
+        <div class="type">
+          <%= type.name %>
+
+          <% type.sites.each do |site| %>
+            <div class="site">
+              <%= link_to site.title, site.url %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

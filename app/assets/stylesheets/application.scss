@@ -1,3 +1,26 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bourbon";
+
+
+.category{
+  border: 1px solid #ddd;
+  padding: rem(20);
+  margin-bottom: rem(10);
+
+  font-size: rem(36);
+  font-weight: bold;
+
+  .type{
+    font-size: rem(24);
+    padding: rem(20);
+    margin-bottom: rem(10);
+    border: 1px solid #eee;
+
+    .site{
+      font-size: rem(18);
+      padding: rem(20);
+      margin-bottom: rem(10);
+    }
+  }
+}
