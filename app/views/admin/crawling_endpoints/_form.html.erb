@@ -1,0 +1,41 @@
+<%= form_for [:admin, @admin_crawling_endpoint] do |f| %>
+  <% if @admin_crawling_endpoint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_crawling_endpoint.errors.count, "error") %> prohibited this admin_crawling_endpoint from being saved:</h2>
+
+      <ul>
+      <% @admin_crawling_endpoint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+
+    <div class="form-group">
+      <%= f.label :url %>
+      <%= f.text_field :url, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :list_selector %>
+      <div class="input-group">
+        <span class="input-group-addon">$("</span>
+        <%= f.text_field :list_selector, class: 'form-control' %>
+        <span class="input-group-addon">")</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :detail_selector %>
+      <div class="input-group">
+        <span class="input-group-addon">$("</span>
+        <%= f.text_field :detail_selector, class: 'form-control' %>
+        <span class="input-group-addon">")</span>
+      </div>
+    </div>
+
+    <%= f.submit :save, class: 'btn btn-default' %>
+  </div>
+<% end %>

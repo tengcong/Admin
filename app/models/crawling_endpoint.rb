@@ -3,6 +3,6 @@ class CrawlingEndpoint
   include Mongoid::Timestamps
 
   field :url
-
-  belongs_to :site
+  field :list_selector
+  field :detail_selector
 end

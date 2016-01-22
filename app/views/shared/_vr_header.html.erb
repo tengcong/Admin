@@ -24,9 +24,9 @@
           <ul class="dropdown-menu">
             <%= active_link_to '文章', admin_articles_path, wrap_tag: :li, active: :exact %>
             <%= active_link_to '抓取', scrawler_page_admin_articles_path, wrap_tag: :li %>
+            <%= active_link_to '爬取Endpoint管理', admin_crawling_endpoints_path, wrap_tag: :li, active: :exact %>
           </ul>
         </li>
-
       </ul>
     </div>
   </div>

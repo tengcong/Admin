@@ -1,0 +1,26 @@
+<%= render "shared/vr_header" %>
+
+<div class="container">
+
+  <table class="table">
+
+    <% @articles.each do |article| %>
+      <tr>
+        <td>
+          <%= article.title %>
+        </td>
+
+        <td>
+          <%= image_tag article.thumbnail %>
+        </td>
+
+        <td>
+          <%= article.description %>
+        </td>
+      </tr>
+    <% end %>
+
+  </table>
+
+</div>
+

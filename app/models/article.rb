@@ -5,4 +5,9 @@ class Article
   include Publishable
 
   orderable
+
+  field :title
+  field :thumbnail
+  field :description
+  field :body
 end

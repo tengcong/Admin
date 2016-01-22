@@ -13,4 +13,5 @@ class Site
   field :url
   field :icon_url
   field :crawlable, type: Boolean, default: false
+
 end

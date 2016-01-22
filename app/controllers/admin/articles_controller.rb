@@ -2,6 +2,7 @@ class Admin::ArticlesController < Admin::MainController
   before_action :set_admin_article, only: [:show, :edit, :update, :destroy]
 
   def scrawler_page
+
   end
 
   def crawl

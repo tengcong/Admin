@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     # vr #
+    resources :crawling_endpoints do
+      collection do
+        get 'crawl_list'
+      end
+    end
+
     resources :articles do
       collection do
         get 'scrawler_page'

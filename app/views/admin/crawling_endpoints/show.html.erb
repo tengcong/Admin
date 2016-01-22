@@ -1,0 +1,23 @@
+<%= render "shared/vr_header" %>
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <%= link_to 'Edit', edit_admin_crawling_endpoint_path(@admin_crawling_endpoint), class: 'btn btn-default' %>
+
+  <table class="table">
+    <tr>
+      <td>URL</td>
+      <td>
+        <%= @admin_crawling_endpoint.url %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>jQuery Selector</td>
+      <td>
+        <%= @admin_crawling_endpoint.match_regulation %>
+      </td>
+    </tr>
+  </table>
+</div>
