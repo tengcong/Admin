@@ -19,19 +19,55 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :list_selector %>
+      <%= f.label :list_item_selector %>
       <div class="input-group">
         <span class="input-group-addon">$("</span>
-        <%= f.text_field :list_selector, class: 'form-control' %>
+        <%= f.text_field :list_item_selector, class: 'form-control' %>
         <span class="input-group-addon">")</span>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :detail_selector %>
+      <%= f.label :thumbnail_selector %>
       <div class="input-group">
         <span class="input-group-addon">$("</span>
-        <%= f.text_field :detail_selector, class: 'form-control' %>
+        <%= f.text_field :thumbnail_selector, class: 'form-control' %>
+        <span class="input-group-addon">")</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :title_selector %>
+      <div class="input-group">
+        <span class="input-group-addon">$("</span>
+        <%= f.text_field :title_selector, class: 'form-control' %>
+        <span class="input-group-addon">")</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description_selector %>
+      <div class="input-group">
+        <span class="input-group-addon">$("</span>
+        <%= f.text_field :description_selector, class: 'form-control' %>
+        <span class="input-group-addon">")</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :published_at_selector %>
+      <div class="input-group">
+        <span class="input-group-addon">$("</span>
+        <%= f.text_field :published_at_selector, class: 'form-control' %>
+        <span class="input-group-addon">")</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :detail_page_selector %>
+      <div class="input-group">
+        <span class="input-group-addon">$("</span>
+        <%= f.text_field :detail_page_selector, class: 'form-control' %>
         <span class="input-group-addon">")</span>
       </div>
     </div>

@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     # vr #
     resources :crawling_endpoints do
-      collection do
-        get 'crawl_list'
-      end
+      get 'crawl_list'
     end
 
     resources :articles do

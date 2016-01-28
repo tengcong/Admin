@@ -6,15 +6,12 @@
 
   <div class="buttons">
     <%= link_to '创建网页源', new_admin_crawling_endpoint_path, class: 'btn btn-default' %>
-    <%= link_to '爬取文章列表', crawl_list_admin_crawling_endpoints_path, class: 'btn btn-default' %>
   </div>
 
   <table class='table table-striped'>
     <thead>
       <tr>
         <th>URL</th>
-        <th>List Selector</th>
-        <th>Detail Page Selector</th>
         <th colspan="2">操作</th>
       </tr>
     </thead>
@@ -23,11 +20,11 @@
       <% @admin_crawling_endpoints.each do |admin_crawling_endpoint| %>
         <tr>
           <td><%= admin_crawling_endpoint.url %></td>
-          <td>$("<%= admin_crawling_endpoint.list_selector %>")</td>
-          <td>$("<%= admin_crawling_endpoint.detail_selector %>")</td>
-          <td><%= link_to 'Show', [:admin, admin_crawling_endpoint] %></td>
           <td><%= link_to 'Edit', edit_admin_crawling_endpoint_path(admin_crawling_endpoint) %></td>
           <td><%= link_to 'Destroy', [:admin, admin_crawling_endpoint], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td>
+            <%= link_to '爬取文章列表', admin_crawling_endpoint_crawl_list_path(admin_crawling_endpoint) %>
+          </td>
         </tr>
       <% end %>
     </tbody>
