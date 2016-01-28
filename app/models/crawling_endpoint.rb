@@ -43,11 +43,7 @@ class CrawlingEndpoint
     if url[/http/]
       url
     else
-      if url[0] == '/'
-        uri.host + url
-      else
-        uri + url
-      end
+      uri.host + url
     end
   end
 end
