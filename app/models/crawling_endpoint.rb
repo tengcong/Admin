@@ -43,7 +43,7 @@ class CrawlingEndpoint
     if url[/http/]
       url
     else
-      uri.host + url
+      "#{uri.scheme}://#{uri.host}#{url}"
     end
   end
 end
