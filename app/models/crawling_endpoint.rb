@@ -39,8 +39,7 @@ class CrawlingEndpoint
 
   def construct_url url
     uri = URI(self.url)
-
-    if url[/http/]
+    if /http/ =~ url
       url
     else
       "#{uri.scheme}://#{uri.host}/#{url}"
