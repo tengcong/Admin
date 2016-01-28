@@ -19,6 +19,7 @@
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
+//= require ckeditor/init
 //= require_tree .
 
 $(function(){
@@ -324,4 +325,4 @@ $(function(){
   });
 
   setupImageEffect();
-})
+});

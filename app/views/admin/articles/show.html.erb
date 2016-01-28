@@ -1,4 +1,18 @@
-<p id="notice"><%= notice %></p>
+<%= render "shared/vr_header" %>
 
-<%= link_to 'Edit', edit_admin_article_path(@admin_article) %> |
-<%= link_to 'Back', admin_articles_path %>
+<div class="container">
+
+  <h1>
+    <%= @admin_article.title %>
+  </h1>
+
+  <h5>
+    <%= @admin_article.description %>
+  </h5>
+
+
+
+  <%= sanitize @admin_article.body %>
+
+  <%= link_to 'Edit', edit_admin_article_path(@admin_article) %>
+</div>

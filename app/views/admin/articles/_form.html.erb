@@ -1,4 +1,4 @@
-<%= form_for(@admin_article) do |f| %>
+<%= form_for [:admin, @admin_article] do |f| %>
   <% if @admin_article.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_article.errors.count, "error") %> prohibited this admin_article from being saved:</h2>
@@ -11,7 +11,26 @@
     </div>
   <% end %>
 
+  <div class="form-group">
+    <%= f.text_field :title, class: 'form-control', placeholder: 'title' %>
+  </div>
+
+  <div class="form-group">
+    <%= image_tag @admin_article.try :thumbnail %>
+    <%= f.text_field :thumbnail, class: 'form-control', placeholder: 'thumbnail url' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_area :description, class: 'form-control', placeholder: 'description' %>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">
+      <%= f.cktext_area :body, class: 'form-control' %>
+    </div>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :save, class: 'btn btn-default' %>
   </div>
 <% end %>

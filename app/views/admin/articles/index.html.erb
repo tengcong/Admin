@@ -14,9 +14,9 @@
     <tbody>
       <% @admin_articles.each do |admin_article| %>
         <tr>
-          <td><%= link_to 'Show', admin_article %></td>
+          <td><%= link_to 'Show', [:admin, admin_article] %></td>
           <td><%= link_to 'Edit', edit_admin_article_path(admin_article) %></td>
-          <td><%= link_to 'Destroy', admin_article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', [:admin, admin_article], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>

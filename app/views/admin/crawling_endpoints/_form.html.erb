@@ -72,6 +72,15 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <%= f.label :article_page_content %>
+      <div class="input-group">
+        <span class="input-group-addon">$("</span>
+        <%= f.text_field :article_page_content, class: 'form-control' %>
+        <span class="input-group-addon">")</span>
+      </div>
+    </div>
+
     <%= f.submit :save, class: 'btn btn-default' %>
   </div>
 <% end %>

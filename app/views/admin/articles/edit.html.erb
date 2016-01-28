@@ -1,6 +1,8 @@
-<h1>Editing Admin Article</h1>
+<%= render "shared/vr_header" %>
+<div class="container">
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @admin_article %> |
-<%= link_to 'Back', admin_articles_path %>
+  <%= render 'form' %>
+
+  <iframe src='<%= @admin_article.source %>' width='1024px' height='1500px'>
+</div>

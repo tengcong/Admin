@@ -86,16 +86,16 @@ namespace :scrawler do
       end
     end
   end
-end
 
-def open_url url
-  begin
-    page = open(url).read
-    page.force_encoding("gbk")
-    page.encode!("utf-8")
+  def open_url url
+    begin
+      page = open(url).read
+      page.force_encoding("gbk")
+      page.encode!("utf-8")
 
-    Nokogiri::HTML.parse page
-  rescue
-    nil
+      Nokogiri::HTML.parse page
+    rescue
+      nil
+    end
   end
 end

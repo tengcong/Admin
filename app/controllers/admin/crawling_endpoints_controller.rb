@@ -2,8 +2,8 @@ class Admin::CrawlingEndpointsController < Admin::MainController
   before_action :set_admin_crawling_endpoint, only: [:show, :edit, :update, :destroy]
 
   def crawl_list
-    endpoint = CrawlingEndpoint.find(params[:crawling_endpoint_id])
-    @articles = endpoint.crawl
+    @endpoint = CrawlingEndpoint.find(params[:crawling_endpoint_id])
+    @articles = @endpoint.crawl
   end
 
   # GET /admin/crawling_endpoints
@@ -75,6 +75,6 @@ class Admin::CrawlingEndpointsController < Admin::MainController
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_crawling_endpoint_params
       params[:crawling_endpoint].permit(:url,
-        :list_item_selector, :thumbnail_selector, :title_selector, :description_selector, :published_at_selector, :detail_page_selector)
+        :list_item_selector, :thumbnail_selector, :title_selector, :description_selector, :published_at_selector, :detail_page_selector, :article_page_content)
     end
 end

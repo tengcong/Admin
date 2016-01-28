@@ -1,10 +1,9 @@
 <%= render "shared/vr_header" %>
 
 <div class="container">
-
   <table class="table">
-
     <% @articles.each do |article| %>
+
       <tr>
         <td>
           <%= article.title %>
@@ -23,12 +22,17 @@
         </td>
 
         <td>
-          <%= article.detail_page_url %>
+          <%= form_for [:admin, article] do |f| %>
+            <%= f.hidden_field :title, value: article.title %>
+            <%= f.hidden_field :thumbnail, value: article.thumbnail %>
+            <%= f.hidden_field :description, value: article.description %>
+            <%= f.hidden_field :published_at, value: article.published_at %>
+            <%= f.hidden_field :source, value: article.source %>
+            <%= f.submit :save, class: 'btn btn-default' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
-
   </table>
-
 </div>
 

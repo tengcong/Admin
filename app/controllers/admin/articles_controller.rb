@@ -22,6 +22,7 @@ class Admin::ArticlesController < Admin::MainController
 
   # GET /admin/articles/new
   def new
+
     @admin_article = Article.new
   end
 
@@ -32,11 +33,16 @@ class Admin::ArticlesController < Admin::MainController
   # POST /admin/articles
   # POST /admin/articles.json
   def create
+
+    if @admin_article = Article.where(title: admin_article_params[:title]).first
+      return redirect_to edit_admin_article_path(@admin_article)
+    end
+
     @admin_article = Article.new(admin_article_params)
 
     respond_to do |format|
       if @admin_article.save
-        format.html { redirect_to @admin_article, notice: 'Article was successfully created.' }
+        format.html { redirect_to edit_admin_article_path(@admin_article), notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @admin_article }
       else
         format.html { render :new }
@@ -50,7 +56,7 @@ class Admin::ArticlesController < Admin::MainController
   def update
     respond_to do |format|
       if @admin_article.update(admin_article_params)
-        format.html { redirect_to @admin_article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to [:admin, @admin_article], notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_article }
       else
         format.html { render :edit }
@@ -77,6 +83,8 @@ class Admin::ArticlesController < Admin::MainController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_article_params
-      params[:admin_article]
+      params[:article].permit(
+        :title, :thumbnail, :description, :body, :source, :published_at
+      )
     end
 end
